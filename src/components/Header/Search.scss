@@ -1,0 +1,59 @@
+@import "../../style/colors";
+.search {
+  padding: 60px;
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: 40px;
+    color: $white;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  &__container {
+    display: flex;
+  }
+
+  &__input {
+    margin-right: 15px;
+    padding: 16px 20px;
+    width: 713px;
+    height: 57px;
+    border-style: none;
+    border-radius: 4px;
+    background: rgba(50, 50, 50, 0.8);
+    font-size: 20px;
+    color: $white;
+    outline: 1px solid $gray;
+
+    transition: outline 0.2s linear;
+
+    &:focus {
+      outline: 1px solid $red;
+    }
+  }
+
+  &__button {
+    width: 233px;
+    height: 57px;
+    background-color: rgba($red, 0.8);
+    border-radius: 4px;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $white;
+    cursor: pointer;
+
+    transition: transform 0.2s linear, background 0.2s linear,
+      border 0.2s linear;
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:hover {
+      background-color: darken($red, 1%);
+    }
+  }
+}

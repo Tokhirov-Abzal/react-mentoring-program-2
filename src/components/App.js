@@ -1,12 +1,12 @@
 import React from "react";
-import JsComponent from "./JsComponent";
-import JsxComponent from "./JsxComponent";
+import { Header, Main } from ".";
+import "../style/main.scss";
 
 const App = () => {
   return (
-    <div>
-      <JsComponent />
-      <JsxComponent />
+    <div className="container">
+      <Header />
+      <Main />
     </div>
   );
 };

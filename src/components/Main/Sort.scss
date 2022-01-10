@@ -1,0 +1,16 @@
+@import "../../style/colors";
+
+.sort {
+  display: flex;
+  color: $lightGray;
+  font-weight: 300;
+
+  h3 {
+    margin-left: 30px;
+    font-weight: 400;
+  }
+
+  &__options {
+    color: $white;
+  }
+}

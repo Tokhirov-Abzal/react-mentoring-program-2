@@ -1,0 +1,43 @@
+@import "../../style/colors";
+
+.moviecard {
+  width: 325px;
+  height: 500px;
+  margin-right: 35px;
+  margin-bottom: 50px;
+  img {
+    width: 322px;
+    height: 455px;
+    background-size: cover;
+  }
+
+  &__info {
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    h3 {
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: $white;
+    }
+
+    h4 {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $lightGray;
+    }
+
+    &--date {
+      padding: 4px 0;
+      border: 1px solid $lightGray;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
+      width: 66px;
+      height: 30px;
+    }
+  }
+}

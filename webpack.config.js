@@ -1,5 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const extractPlugin = new MiniCssExtractPlugin({
+  filename: "main.css",
+});
 
 module.exports = (env) => {
   return {
@@ -7,6 +12,7 @@ module.exports = (env) => {
     output: {
       path: path.join(__dirname, "/dist"),
       filename: "index_bundle.js",
+      publicPath: "/",
     },
     module: {
       rules: [
@@ -17,12 +23,25 @@ module.exports = (env) => {
             loader: "babel-loader",
           },
         },
+        {
+          test: /\.(css|scss)$/,
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        },
+        {
+          test: /\.(jpe$g|png|svg)$/i,
+          use: [
+            {
+              loader: "url-loader",
+            },
+          ],
+        },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: "./src/index.html",
       }),
+      extractPlugin,
     ],
     resolve: {
       extensions: [".js", ".jsx"],
