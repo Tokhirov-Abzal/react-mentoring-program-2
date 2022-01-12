@@ -1,11 +1,12 @@
 @import "../../style/colors";
 
 .moviecard {
+  position: relative;
   width: 325px;
   height: 500px;
   margin-right: 35px;
   margin-bottom: 50px;
-  img {
+  &__poster {
     width: 322px;
     height: 455px;
     background-size: cover;
@@ -38,6 +39,57 @@
       text-align: center;
       width: 66px;
       height: 30px;
+    }
+  }
+
+  .edit__icon {
+    opacity: 0;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s linear;
+  }
+
+  &:hover {
+    .edit__icon {
+      opacity: 1;
+    }
+  }
+}
+
+.mini__modal {
+  padding: 12px;
+  width: 190px;
+  height: 110px;
+  position: relative;
+  background-color: $black;
+  color: $white;
+  position: absolute;
+  border-radius: 4px;
+  top: 50px;
+  right: 20px;
+
+  img {
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: 5;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  &--options {
+    margin-top: 20px;
+
+    div {
+      padding: 5px 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: $red;
+      }
     }
   }
 }

@@ -1,0 +1,60 @@
+@import "../../style/colors";
+
+.select {
+  cursor: pointer;
+  position: relative;
+
+  .options {
+    position: relative;
+
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      height: 57px;
+      padding: 16px 18px;
+      background: rgba($gray, 0.9);
+      opacity: 0.8;
+      font-size: 20px;
+      border: none;
+      color: $white;
+      border-radius: 4px;
+
+      color: $white;
+      outline: 1px solid $gray;
+
+      img {
+        width: 20px;
+        height: 20px;
+
+        transition: transform 0.1s ease-in-out;
+      }
+
+      .arrow-up {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__container {
+      padding: 16px 18px;
+      width: 100%;
+      position: absolute;
+      top: 57px;
+      left: -1px;
+      z-index: 5;
+      background-color: $black;
+
+      label {
+        display: flex;
+        color: $white;
+        height: 25px;
+        align-items: center;
+
+        input[type="checkbox"] {
+          outline: none;
+        }
+      }
+    }
+  }
+}

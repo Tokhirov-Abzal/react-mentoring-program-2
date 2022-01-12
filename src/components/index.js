@@ -12,3 +12,11 @@ export { default as Footer } from "./Footer/Footer";
 
 // ErrorBoundries
 export { default as Error } from "./Error/Error";
+
+// Modals
+export { default as Modal } from "./Modal/Modal";
+export { default as AddModal } from "./Modal/AddModal";
+export { default as NotificationModal } from "./Modal/NotificationModal";
+
+// Checkbox inside the select
+export { default as Select } from "./Helper/Select";

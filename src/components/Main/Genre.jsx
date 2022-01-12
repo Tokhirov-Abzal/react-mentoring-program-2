@@ -3,21 +3,12 @@ import { Sort } from "..";
 
 import "./Genre.scss";
 
-const genreList = [
-  { id: 1, title: "All" },
-  { id: 2, title: "Documentary" },
-  { id: 3, title: "Comedy" },
-  { id: 4, title: "Horror" },
-  { id: 5, title: "Crime" },
-];
-
-const Genre = () => {
+const Genre = ({ genreList }) => {
   return (
     <div className="genre">
       <ul className="genre__list">
-        {genreList.map((genre) => (
-          <li key={genre.id}>{genre.title}</li>
-        ))}
+        {genreList &&
+          genreList.map((genre) => <li key={genre.id}>{genre.title}</li>)}
       </ul>
       <Sort />
     </div>

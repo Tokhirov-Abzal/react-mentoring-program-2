@@ -3,7 +3,7 @@ import "./MovieList.scss";
 
 import { MovieCard } from "..";
 
-const MovieList = () => {
+const MovieList = ({ genreList }) => {
   return (
     <div className="movielist">
       <h2>1 movies found</h2>
@@ -12,6 +12,7 @@ const MovieList = () => {
           title="Pulp Fiction"
           genre="Action & adventure"
           date={2004}
+          genreList={genreList}
         />
         <MovieCard
           title="Pulp Fiction"
