@@ -7,6 +7,7 @@ export { default as Genre } from "./Main/Genre";
 export { default as Sort } from "./Main/Sort";
 export { default as MovieList } from "./Main/MovieList";
 export { default as MovieCard } from "./Main/MovieCard";
+export { default as ClickedPoster } from "./Header/ClickedPoster";
 
 export { default as Footer } from "./Footer/Footer";
 

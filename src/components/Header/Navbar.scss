@@ -3,4 +3,9 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+
+  &__logo,
+  .search__icon {
+    cursor: pointer;
+  }
 }

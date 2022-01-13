@@ -1,0 +1,75 @@
+@import "../../style/colors";
+
+.clickedPoster {
+  &__info {
+    margin-top: 30px;
+    display: flex;
+  }
+
+  &__detail {
+    margin-left: 57px;
+  }
+
+  &__title {
+    display: flex;
+    color: $white;
+  }
+
+  &__rate {
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border: 1px solid $white;
+    border-radius: 50%;
+    font-size: 20px;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 49px;
+    color: $white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 30px 50px 30px 0;
+
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    color: $red;
+  }
+
+  h4 {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 17px;
+    color: rgba($white, 0.5);
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 27px;
+    color: rgba($white, 0.7);
+  }
+
+  &__image {
+    width: 323px;
+    height: 486px;
+  }
+
+  &__title {
+    display: flex;
+  }
+
+  &__timeinfo {
+    display: flex;
+  }
+}

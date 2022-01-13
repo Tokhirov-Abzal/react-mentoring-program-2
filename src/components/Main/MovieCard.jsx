@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import "./MovieCard.scss";
 import editSvg from "../../assets/edit.svg";
 import closePng from "../../assets/x.png";
 
-import { NotificationModal, AddModal, Modal, genreList } from "..";
-const MovieCard = ({ title, genre, date, genreList }) => {
-  const [editMenu, setEditMenu] = React.useState(false);
+import { NotificationModal, AddModal, Modal } from "..";
 
+import MovieContext from "../../context/movieData";
+
+const MovieCard = ({
+  title,
+  genre,
+  date,
+  genreList,
+  imageUrl,
+  onMovieCardClick,
+  id,
+}) => {
+  const [editMenu, setEditMenu] = React.useState(false);
   const [editModal, setEditModal] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
+
+  const { setClickedMovieId, setHeaderPoster } = useContext(MovieContext);
+
+  const onClickMovieCard = (id) => {
+    setClickedMovieId(id);
+
+    setHeaderPoster(true);
+  };
+
   return (
     <React.Fragment>
       <Modal modalState={editModal} setModalState={setEditModal}>
@@ -23,19 +42,15 @@ const MovieCard = ({ title, genre, date, genreList }) => {
         />
       </Modal>
 
-      <div className="moviecard">
-        <img
-          className="moviecard__poster"
-          src="https://place-hold.it/322x455"
-          alt=""
-        />
+      <div className="moviecard" onClick={() => onClickMovieCard(id)}>
+        <img className="moviecard__poster" src={imageUrl} alt="" />
         <div className="moviecard__info">
           <div>
             <h3>{title}</h3>
             <h4>{genre}</h4>
           </div>
           <div className="moviecard__info--date">
-            <h3>{date}</h3>
+            <h3>{date.split("-")[0]}</h3>
           </div>
         </div>
 
@@ -62,8 +77,8 @@ const MovieCard = ({ title, genre, date, genreList }) => {
 
 MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
-  genre: PropTypes.string,
-  date: PropTypes.number,
+  genre: PropTypes.array,
+  date: PropTypes.string,
 };
 
 export default MovieCard;

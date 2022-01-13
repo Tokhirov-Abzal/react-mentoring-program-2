@@ -1,34 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./MovieList.scss";
-
 import { MovieCard } from "..";
 
+// Context
+import MovieDataContext from "../../context/movieData";
+
 const MovieList = ({ genreList }) => {
+  const { data } = useContext(MovieDataContext);
+
+  const dataFunc = (obj) => {
+    console.log(obj);
+  };
+
   return (
     <div className="movielist">
       <h2>1 movies found</h2>
       <div className="movielist__container">
-        <MovieCard
-          title="Pulp Fiction"
-          genre="Action & adventure"
-          date={2004}
-          genreList={genreList}
-        />
-        <MovieCard
-          title="Pulp Fiction"
-          genre="Action & adventure"
-          date={2004}
-        />
-        <MovieCard
-          title="Pulp Fiction"
-          genre="Action & adventure"
-          date={2004}
-        />
-        <MovieCard
-          title="Pulp Fiction"
-          genre="Action & adventure"
-          date={2004}
-        />
+        {data &&
+          data.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              imageUrl={movie.poster_path}
+              genre={movie.genres}
+              date={movie.release_date}
+              genreList={genreList}
+              onMovieCardClick={dataFunc}
+            />
+          ))}
       </div>
     </div>
   );
