@@ -8,19 +8,10 @@ import { NotificationModal, AddModal, Modal } from "..";
 
 import MovieContext from "../../context/movieData";
 
-const MovieCard = ({
-  title,
-  genre,
-  date,
-  genreList,
-  imageUrl,
-  onMovieCardClick,
-  id,
-}) => {
+const MovieCard = ({ title, genre, date, genreList, imageUrl, id }) => {
   const [editMenu, setEditMenu] = React.useState(false);
   const [editModal, setEditModal] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
-
   const { setClickedMovieId, setHeaderPoster } = useContext(MovieContext);
 
   const onClickMovieCard = (id) => {
@@ -29,6 +20,29 @@ const MovieCard = ({
     setHeaderPoster(true);
   };
 
+  const onClickEditIcon = (e) => {
+    setEditMenu((prev) => !prev);
+    e.stopPropagation();
+  };
+
+  const onClickOptions = (e) => {
+    const string = e.target.innerText.toLowerCase();
+    switch (string) {
+      case "edit":
+        setEditModal(true);
+        setEditMenu(false);
+        break;
+      case "delete":
+        setDeleteModal(true);
+        setEditMenu(false);
+        break;
+      default:
+        return null;
+    }
+  };
+
+  // setEditModal(true)
+  // setDeleteModal(true)
   return (
     <React.Fragment>
       <Modal modalState={editModal} setModalState={setEditModal}>
@@ -58,15 +72,18 @@ const MovieCard = ({
           className="edit__icon"
           src={editSvg}
           alt="editIcon"
-          onClick={() => setEditMenu((prev) => !prev)}
+          onClick={(e) => onClickEditIcon(e)}
         />
 
         {editMenu && (
-          <div className="mini__modal">
+          <div className="mini__modal" onClick={(e) => e.stopPropagation()}>
             <img src={closePng} alt="x" onClick={() => setEditMenu(false)} />
-            <div className="mini__modal--options">
-              <div onClick={() => setEditModal(true)}>Edit</div>
-              <div onClick={() => setDeleteModal(true)}>Delete</div>
+            <div
+              className="mini__modal--options"
+              onClick={(e) => onClickOptions(e)}
+            >
+              <div>Edit</div>
+              <div>Delete</div>
             </div>
           </div>
         )}

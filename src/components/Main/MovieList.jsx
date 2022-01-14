@@ -8,10 +8,6 @@ import MovieDataContext from "../../context/movieData";
 const MovieList = ({ genreList }) => {
   const { data } = useContext(MovieDataContext);
 
-  const dataFunc = (obj) => {
-    console.log(obj);
-  };
-
   return (
     <div className="movielist">
       <h2>1 movies found</h2>
@@ -26,7 +22,6 @@ const MovieList = ({ genreList }) => {
               genre={movie.genres}
               date={movie.release_date}
               genreList={genreList}
-              onMovieCardClick={dataFunc}
             />
           ))}
       </div>

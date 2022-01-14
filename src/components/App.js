@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Header, Main, Footer } from ".";
 import "../style/main.scss";
 
@@ -111,17 +111,50 @@ const data = [
   },
 ];
 
+// function useToggle() {
+//   const [clickedMovieId, setClickedMovieId] = React.useState(null);
+//   const [headerPoster, setHeaderPoster] = useState(false);
+
+//   useEffect()
+// }
+
+export function useSort() {
+  const [toggle, setToggle] = useState(true);
+  // const [sortedData, setSortedData] = useState(data);
+
+  useEffect(() => {
+    if (toggle) {
+      data.sort(
+        (a, b) =>
+          Number(b.release_date.split("-")[0]) -
+          Number(a.release_date.split("-")[0])
+      );
+    } else {
+      data.sort(
+        (a, b) =>
+          Number(a.release_date.split("-")[0]) -
+          Number(b.release_date.split("-")[0])
+      );
+    }
+  }, [toggle]);
+
+  return setToggle;
+}
+
 const App = () => {
   const [clickedMovieId, setClickedMovieId] = React.useState(null);
-  const findMovie = data.find((item) => item.id === clickedMovieId);
   const [headerPoster, setHeaderPoster] = useState(false);
+  const findMovie = data.find((item) => item.id === clickedMovieId);
 
-  console.log(findMovie);
+  const setToggle = useSort(data);
+  // Custom hook
+
   return (
     <div className="container">
       <MovieDataContext.Provider
         value={{
           data,
+          setToggle,
           clickedMovieId,
           setClickedMovieId,
           headerPoster,
