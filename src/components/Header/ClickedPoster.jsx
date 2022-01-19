@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Navbar } from "..";
 import "./ClickedPoster.scss";
-import MovieDataContext from "../../context/movieData";
 
 const ClickedPoster = ({
   poster_path,
@@ -12,10 +11,6 @@ const ClickedPoster = ({
   runtime,
   overview,
 }) => {
-  const { clickedMovie } = useContext(MovieDataContext);
-
-  console.log(clickedMovie);
-
   return (
     <div className="clickedPoster">
       <Navbar searchIcon={true} />

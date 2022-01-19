@@ -1,9 +1,12 @@
 import React from "react";
 import "./Select.scss";
 
+import { useSelector } from "react-redux";
+
 import arrow from "../../assets/arrow-up.svg";
-const Select = ({ genreList, title }) => {
+const Select = ({ title }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const genreList = useSelector((state) => state.genreList);
   return (
     <div className="select">
       <label htmlFor="modal__checkbox">{title}</label>
@@ -14,12 +17,12 @@ const Select = ({ genreList, title }) => {
           onClick={() => setIsOpen((prev) => !prev)}
         >
           Select Genre
-          <img src={arrow} className={!isOpen && "arrow-up"} alt="" />
+          <img src={arrow} className={!isOpen ? "arrow-up" : ""} alt="" />
         </div>
         {isOpen && (
           <div className="options__container">
             {genreList.map((genre) => (
-              <label htmlFor={`checkbox__${genre.id}`}>
+              <label htmlFor={`checkbox__${genre.id}`} key={genre.id}>
                 <input id={`checkbox__${genre.id}`} type="checkbox" />
                 <span>{genre.title}</span>
               </label>

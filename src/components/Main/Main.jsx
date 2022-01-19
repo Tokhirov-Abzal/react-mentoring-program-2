@@ -1,12 +1,12 @@
 import React from "react";
 import { Genre, MovieList, Error } from "../";
 
-const Main = ({ genreList }) => {
+const Main = () => {
   return (
     <React.Fragment>
-      <Genre genreList={genreList} />
+      <Genre />
       <Error>
-        <MovieList genreList={genreList} />
+        <MovieList />
       </Error>
     </React.Fragment>
   );

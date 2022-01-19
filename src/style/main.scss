@@ -21,5 +21,9 @@ li {
   width: 1200px;
   margin: 0 auto;
   background-color: $black;
-  height: 1920px;
+  height: 1720px;
+
+  &.active {
+    height: 1920px;
+  }
 }

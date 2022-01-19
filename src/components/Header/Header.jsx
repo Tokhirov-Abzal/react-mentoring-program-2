@@ -1,35 +1,29 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "./Header.scss";
 
 import backgroundImg from "../../assets/Header.png";
 
 import { Navbar, Search, Modal, AddModal, ClickedPoster } from "../";
-import movieDataContext from "../../context/movieData";
 
-const Header = ({ genreList }) => {
+const Header = () => {
   const [modalState, setModalState] = useState(false);
-
-  const { headerPoster, findMovie } = useContext(movieDataContext);
-
+  const clickedMovie = useSelector((state) => state.clickedMovie);
   return (
-    <div className={headerPoster ? "header withPoster" : "header"}>
+    <div className={clickedMovie ? "header withPoster" : "header"}>
       <Modal modalState={modalState} setModalState={setModalState}>
-        <AddModal
-          genreList={genreList}
-          setModalState={setModalState}
-          modalTitle="Add movie"
-        />
+        <AddModal setModalState={setModalState} modalTitle="Add movie" />
       </Modal>
 
-      {!findMovie ? (
+      {!clickedMovie ? (
         <React.Fragment>
           <img className="background-image" src={backgroundImg} alt="" />
           <Navbar setModalState={setModalState} button={true} />
           <Search />
         </React.Fragment>
       ) : (
-        <ClickedPoster {...findMovie} />
+        <ClickedPoster {...clickedMovie} />
       )}
     </div>
   );

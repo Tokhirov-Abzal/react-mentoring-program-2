@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./MovieCard.scss";
 import editSvg from "../../assets/edit.svg";
@@ -6,19 +6,27 @@ import closePng from "../../assets/x.png";
 
 import { NotificationModal, AddModal, Modal } from "..";
 
-import MovieContext from "../../context/movieData";
+// redux
+import { useDispatch } from "react-redux";
 
-const MovieCard = ({ title, genre, date, genreList, imageUrl, id }) => {
+// Action creator
+import { clickMovie } from "../../redux/action";
+
+const MovieCard = ({
+  id,
+  title,
+  poster_path,
+  genres,
+  release_date,
+  overview,
+  vote_average,
+  runtime,
+}) => {
   const [editMenu, setEditMenu] = React.useState(false);
   const [editModal, setEditModal] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
-  const { setClickedMovieId, setHeaderPoster } = useContext(MovieContext);
 
-  const onClickMovieCard = (id) => {
-    setClickedMovieId(id);
-
-    setHeaderPoster(true);
-  };
+  const dispatch = useDispatch();
 
   const onClickEditIcon = (e) => {
     setEditMenu((prev) => !prev);
@@ -41,12 +49,10 @@ const MovieCard = ({ title, genre, date, genreList, imageUrl, id }) => {
     }
   };
 
-  // setEditModal(true)
-  // setDeleteModal(true)
   return (
     <React.Fragment>
       <Modal modalState={editModal} setModalState={setEditModal}>
-        <AddModal genreList={genreList} modalTitle="Edit" />
+        <AddModal modalTitle="Edit" />
       </Modal>
       <Modal modalState={deleteModal} setModalState={setDeleteModal}>
         <NotificationModal
@@ -56,15 +62,31 @@ const MovieCard = ({ title, genre, date, genreList, imageUrl, id }) => {
         />
       </Modal>
 
-      <div className="moviecard" onClick={() => onClickMovieCard(id)}>
-        <img className="moviecard__poster" src={imageUrl} alt="" />
+      <div
+        className="moviecard"
+        onClick={() =>
+          dispatch(
+            clickMovie({
+              id,
+              title,
+              poster_path,
+              genres,
+              release_date,
+              overview,
+              vote_average,
+              runtime,
+            })
+          )
+        }
+      >
+        <img className="moviecard__poster" src={poster_path} alt="" />
         <div className="moviecard__info">
           <div>
             <h3>{title}</h3>
-            <h4>{genre}</h4>
+            <h4>{genres}</h4>
           </div>
           <div className="moviecard__info--date">
-            <h3>{date.split("-")[0]}</h3>
+            <h3>{release_date.split("-")[0]}</h3>
           </div>
         </div>
 
@@ -94,8 +116,8 @@ const MovieCard = ({ title, genre, date, genreList, imageUrl, id }) => {
 
 MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
-  genre: PropTypes.array,
-  date: PropTypes.string,
+  genres: PropTypes.array,
+  release_date: PropTypes.string,
 };
 
 export default MovieCard;

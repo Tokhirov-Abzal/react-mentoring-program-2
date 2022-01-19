@@ -1,9 +1,11 @@
 import React from "react";
 import { Sort } from "..";
+import { useSelector } from "react-redux";
 
 import "./Genre.scss";
 
-const Genre = ({ genreList }) => {
+const Genre = () => {
+  const genreList = useSelector((state) => state.genreList);
   return (
     <div className="genre">
       <ul className="genre__list">

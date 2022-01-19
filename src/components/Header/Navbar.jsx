@@ -1,18 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import logoPng from "../../assets/logo.png";
 import { Button } from "..";
 import "./Navbar.scss";
 import searchBtn from "../../assets/search-btn.svg";
 
-import movieDataContext from "../../context/movieData";
+import { useDispatch } from "react-redux";
+// action creator for reset header poster
+import { resetClickedMovie } from "../../redux/action";
 
 const Navbar = ({ setModalState, button, searchIcon }) => {
-  const { setClickedMovieId, setHeaderPoster } = useContext(movieDataContext);
-
-  const reset = () => {
-    setClickedMovieId(null);
-    setHeaderPoster(false);
-  };
+  const dispatch = useDispatch();
   return (
     <div className="navbar">
       <img className="navbar__logo" src={logoPng} alt="" />
@@ -29,7 +26,7 @@ const Navbar = ({ setModalState, button, searchIcon }) => {
           className="search__icon"
           src={searchBtn}
           alt="search icon"
-          onClick={reset}
+          onClick={() => dispatch(resetClickedMovie())}
         />
       )}
     </div>

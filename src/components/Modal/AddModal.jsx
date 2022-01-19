@@ -2,7 +2,7 @@ import React from "react";
 
 import { Select } from "../";
 
-const AddModal = ({ genreList, modalTitle }) => {
+const AddModal = ({ modalTitle }) => {
   return (
     <React.Fragment>
       <h2>{modalTitle}</h2>
@@ -24,7 +24,7 @@ const AddModal = ({ genreList, modalTitle }) => {
           <input id="modal-rating" type="number" min="0" max="10" />
         </div>
         <div>
-          <Select genreList={genreList} title="Genre" />
+          <Select title="Genre" />
         </div>
         <div>
           <label htmlFor="">Runtime</label>
