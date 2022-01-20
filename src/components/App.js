@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Header, Main, Footer } from ".";
 import "../style/main.scss";
+import { useFormik } from "formik";
+
+console.log(useFormik);
 
 // thunk
 import { fetchData } from "../thunk/thunk";

@@ -18,7 +18,7 @@ const ClickedPoster = ({
         <img className="clickedPoster__image" src={poster_path} alt="" />
         <div className="clickedPoster__detail">
           <div className="clickedPoster__title">
-            <div>
+            <div className="clickedPoster__name">
               <h2>{title}</h2>
               <h4>{genres.join("/")}</h4>
             </div>
