@@ -10,7 +10,11 @@ import { NotificationModal, AddModal, Modal } from "..";
 import { useDispatch } from "react-redux";
 
 // Action creator
-import { clickMovie } from "../../redux/action";
+import {
+  clickMovie,
+  editClickedMovie,
+  deleteClickedMovie,
+} from "../../redux/action";
 
 const MovieCard = ({
   id,
@@ -59,12 +63,13 @@ const MovieCard = ({
           title="Delete"
           info="Are you sure you want to delete this movie?"
           button="Delete"
+          setDeleteModal={setDeleteModal}
         />
       </Modal>
 
       <div
         className="moviecard"
-        onClick={() =>
+        onClick={() => {
           dispatch(
             clickMovie({
               id,
@@ -76,8 +81,9 @@ const MovieCard = ({
               vote_average,
               runtime,
             })
-          )
-        }
+          );
+          dispatch(editClickedMovie(id));
+        }}
       >
         <img className="moviecard__poster" src={poster_path} alt="" />
         <div className="moviecard__info">
@@ -104,8 +110,8 @@ const MovieCard = ({
               className="mini__modal--options"
               onClick={(e) => onClickOptions(e)}
             >
-              <div>Edit</div>
-              <div>Delete</div>
+              <div onClick={() => dispatch(editClickedMovie(id))}>Edit</div>
+              <div onClick={() => dispatch(deleteClickedMovie(id))}>Delete</div>
             </div>
           </div>
         )}

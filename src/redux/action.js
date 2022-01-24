@@ -17,3 +17,30 @@ export function resetClickedMovie() {
     type: "RESET_CLICKED_MOVIE",
   };
 }
+
+export function editClickedMovie(id) {
+  return {
+    type: "EDIT_CLICKED_MOVIE",
+    payload: id,
+  };
+}
+
+export function deleteClickedMovie(id) {
+  return {
+    type: "DELETE_CLICKED_MOVIE",
+    payload: id,
+  };
+}
+
+export function onSuccess() {
+  return {
+    type: "ON_SUCCESS",
+  };
+}
+
+export function onError(err) {
+  return {
+    type: "ON_ERROR",
+    payload: err,
+  };
+}

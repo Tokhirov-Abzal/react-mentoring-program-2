@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./Select.scss";
 
 import { useSelector } from "react-redux";
+import { Field } from "formik";
 
 import arrow from "../../assets/arrow-up.svg";
-const Select = ({ title }) => {
+const Select = ({ title, field, ...props }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const genreList = useSelector((state) => state.genreList);
+
   return (
     <div className="select">
       <label htmlFor="modal__checkbox">{title}</label>
@@ -22,10 +24,10 @@ const Select = ({ title }) => {
         {isOpen && (
           <div className="options__container">
             {genreList.map((genre) => (
-              <label htmlFor={`checkbox__${genre.id}`} key={genre.id}>
-                <input id={`checkbox__${genre.id}`} type="checkbox" />
-                <span>{genre.title}</span>
-              </label>
+              <div key={genre.id} className="options__wrapper">
+                <Field type="checkbox" name="genre" value={genre.title} />
+                <label>{genre.title}</label>
+              </div>
             ))}
           </div>
         )}

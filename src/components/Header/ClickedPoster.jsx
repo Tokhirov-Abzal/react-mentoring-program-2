@@ -15,7 +15,9 @@ const ClickedPoster = ({
     <div className="clickedPoster">
       <Navbar searchIcon={true} />
       <div className="clickedPoster__info">
-        <img className="clickedPoster__image" src={poster_path} alt="" />
+        <div className="clickedPoster__image--container">
+          <img className="clickedPoster__image" src={poster_path} alt="" />
+        </div>
         <div className="clickedPoster__detail">
           <div className="clickedPoster__title">
             <div className="clickedPoster__name">

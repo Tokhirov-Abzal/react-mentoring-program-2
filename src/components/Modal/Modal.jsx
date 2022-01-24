@@ -1,9 +1,12 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { resetClickedMovie } from "../../redux/action";
 
 import "./Modal.scss";
 import cancelPng from "../../assets/x.png";
 
 const Modal = ({ children, modalState, setModalState }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     if (modalState) {
       document.body.style.overflow = "hidden";
@@ -15,10 +18,20 @@ const Modal = ({ children, modalState, setModalState }) => {
   return (
     <div
       className={modalState ? "modal active" : "modal"}
-      onClick={() => setModalState(false)}
+      onClick={() => {
+        setModalState(false);
+        dispatch(resetClickedMovie());
+      }}
     >
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        <img src={cancelPng} alt="x" onClick={() => setModalState(false)} />
+        <img
+          src={cancelPng}
+          alt="x"
+          onClick={() => {
+            setModalState(false);
+            dispatch(resetClickedMovie());
+          }}
+        />
         {children}
       </div>
     </div>

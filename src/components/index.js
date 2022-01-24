@@ -21,3 +21,5 @@ export { default as NotificationModal } from "./Modal/NotificationModal";
 
 // Checkbox inside the select
 export { default as Select } from "./Helper/Select";
+export { default as InputForm } from "./Helper/InputForm";
+export { default as InputTextarea } from "./Helper/InputTextarea";

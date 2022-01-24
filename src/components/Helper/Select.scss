@@ -1,7 +1,6 @@
 @import "../../style/colors";
 
 .select {
-  cursor: pointer;
   position: relative;
 
   .options {
@@ -20,6 +19,7 @@
       border: none;
       color: $white;
       border-radius: 4px;
+      cursor: pointer;
 
       color: $white;
       outline: 1px solid $gray;
@@ -57,4 +57,10 @@
       }
     }
   }
+}
+
+.options__wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 13px;
 }
