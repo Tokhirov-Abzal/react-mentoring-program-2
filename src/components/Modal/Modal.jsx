@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resetClickedMovie } from "../../redux/action";
+import {
+  onSuccess,
+  resetClickedMovie,
+  resetSuccess,
+  onSuccessEdit,
+  onSuccessDelete,
+} from "../../redux/action";
 
 import "./Modal.scss";
 import cancelPng from "../../assets/x.png";
@@ -21,6 +27,9 @@ const Modal = ({ children, modalState, setModalState }) => {
       onClick={() => {
         setModalState(false);
         dispatch(resetClickedMovie());
+        dispatch(resetSuccess());
+        dispatch(onSuccessEdit(false));
+        dispatch(onSuccessDelete(false));
       }}
     >
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
@@ -30,6 +39,9 @@ const Modal = ({ children, modalState, setModalState }) => {
           onClick={() => {
             setModalState(false);
             dispatch(resetClickedMovie());
+            dispatch(resetSuccess());
+            dispatch(onSuccessEdit(false));
+            dispatch(onSuccessDelete(false));
           }}
         />
         {children}

@@ -18,10 +18,17 @@ export function resetClickedMovie() {
   };
 }
 
-export function editClickedMovie(id) {
+export function editClickedMovieById(id) {
   return {
     type: "EDIT_CLICKED_MOVIE",
     payload: id,
+  };
+}
+
+export function onSuccessEdit(state) {
+  return {
+    type: "ON_SUCCESS_TOGGLE",
+    payload: state,
   };
 }
 
@@ -32,9 +39,22 @@ export function deleteClickedMovie(id) {
   };
 }
 
+export function onSuccessDelete(state) {
+  return {
+    type: "ON_SUCCESS_DELETE",
+    payload: state,
+  };
+}
+
 export function onSuccess() {
   return {
     type: "ON_SUCCESS",
+  };
+}
+
+export function resetSuccess() {
+  return {
+    type: "RESET_SUCCESS",
   };
 }
 

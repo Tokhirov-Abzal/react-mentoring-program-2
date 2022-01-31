@@ -12,8 +12,9 @@ import { useDispatch } from "react-redux";
 // Action creator
 import {
   clickMovie,
-  editClickedMovie,
+  editClickedMovieById,
   deleteClickedMovie,
+  showMovie,
 } from "../../redux/action";
 
 const MovieCard = ({
@@ -56,7 +57,7 @@ const MovieCard = ({
   return (
     <React.Fragment>
       <Modal modalState={editModal} setModalState={setEditModal}>
-        <AddModal modalTitle="Edit" />
+        <AddModal modalTitle="Edit" setModalState={setEditModal} />
       </Modal>
       <Modal modalState={deleteModal} setModalState={setDeleteModal}>
         <NotificationModal
@@ -82,7 +83,6 @@ const MovieCard = ({
               runtime,
             })
           );
-          dispatch(editClickedMovie(id));
         }}
       >
         <img className="moviecard__poster" src={poster_path} alt="" />
@@ -110,8 +110,31 @@ const MovieCard = ({
               className="mini__modal--options"
               onClick={(e) => onClickOptions(e)}
             >
-              <div onClick={() => dispatch(editClickedMovie(id))}>Edit</div>
-              <div onClick={() => dispatch(deleteClickedMovie(id))}>Delete</div>
+              <div
+                onClick={() => {
+                  dispatch(
+                    editClickedMovieById({
+                      id,
+                      title,
+                      poster_path,
+                      genres,
+                      release_date,
+                      overview,
+                      vote_average,
+                      runtime,
+                    })
+                  );
+                }}
+              >
+                Edit
+              </div>
+              <div
+                onClick={() => {
+                  dispatch(deleteClickedMovie(id));
+                }}
+              >
+                Delete
+              </div>
             </div>
           </div>
         )}

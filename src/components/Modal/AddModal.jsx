@@ -5,12 +5,16 @@ import { Formik, Form, Field } from "formik";
 import { postMovie, editMovie } from "../../thunk/thunk";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { resetClickedMovie } from "../../redux/action";
+import {
+  editClickedMovieById,
+  onSuccessEdit,
+  resetClickedMovie,
+} from "../../redux/action";
 
 const MovieSchema = Yup.object().shape({
   modalTitle: Yup.string().required("Required"),
   modalReleaseDate: Yup.string().required("Required"),
-  modalUrl: Yup.string().min(5, "minimum 5 character").required("Required!"),
+  modalUrl: Yup.string().url("URL is not relevant").required("Required!"),
   modalRating: Yup.number()
     .min(0, "Minimum 0")
     .max(10, "Max 10")
@@ -19,7 +23,7 @@ const MovieSchema = Yup.object().shape({
   modalOverview: Yup.string().required("Required"),
 });
 
-const AddModal = ({ modalTitle }) => {
+const AddModal = ({ modalTitle, setModalState }) => {
   const dispatch = useDispatch();
   const { editClickedMovie } = useSelector((state) => state);
 
@@ -28,26 +32,31 @@ const AddModal = ({ modalTitle }) => {
       <h2>{modalTitle}</h2>
       <Formik
         initialValues={{
-          modalTitle: "",
-          modalReleaseDate: "",
-          modalUrl: "",
-          modalRating: "",
-          genre: [],
-          modalRuntime: 0,
-          modalOverview: "",
+          modalTitle: editClickedMovie ? editClickedMovie.title : "",
+          modalReleaseDate: editClickedMovie
+            ? editClickedMovie.release_date
+            : "",
+          modalUrl: editClickedMovie ? editClickedMovie.poster_path : "",
+          modalRating: editClickedMovie ? editClickedMovie.vote_average : "",
+          genre: editClickedMovie ? editClickedMovie.genres : [],
+          modalRuntime: editClickedMovie ? editClickedMovie.runtime : "",
+          modalOverview: editClickedMovie ? editClickedMovie.overview : "",
         }}
+        enableReinitialize={true}
         validationSchema={MovieSchema}
         onSubmit={(data, { setSubmitting, resetForm }) => {
-          if (editClickedMovie) {
+          if (editClickedMovie !== null) {
             dispatch(editMovie(data, editClickedMovie));
+            // dispatch(resetClickedMovie());
+            resetForm();
+            setModalState(false);
           } else {
             dispatch(postMovie(data));
+            resetForm();
           }
-
-          resetForm();
         }}
       >
-        {({ values, isSubmitting, errors, touched }) => (
+        {({ values, isSubmitting, errors, touched, resetForm }) => (
           <Form>
             <div className="input__wrapper">
               <Field
@@ -132,7 +141,14 @@ const AddModal = ({ modalTitle }) => {
             </div>
 
             <div className="modal__btn">
-              <button onClick={(e) => e.preventDefault()}>Reset</button>
+              <button
+                onClick={() => {
+                  resetForm();
+                  dispatch(editClickedMovieById(null));
+                }}
+              >
+                Reset
+              </button>
               {editClickedMovie ? (
                 <button type="submit" disabled={isSubmitting}>
                   Edit
@@ -143,9 +159,9 @@ const AddModal = ({ modalTitle }) => {
                 </button>
               )}
             </div>
-            <pre style={{ color: "white" }}>
+            {/* <pre style={{ color: "white" }}>
               {JSON.stringify(values, null, 2)}
-            </pre>
+            </pre> */}
           </Form>
         )}
       </Formik>

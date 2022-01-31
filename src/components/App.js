@@ -1,27 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Header, Main, Footer } from ".";
+import { Header, Main, Footer, NotificationModal, Modal } from ".";
+import { resetSuccess } from "../redux/action";
 import "../style/main.scss";
 
 // thunk
 import { fetchData } from "../thunk/thunk";
 
+// action creators
+
 const App = () => {
   // redux
   const dispatch = useDispatch();
-  const { movies, onSuccess, editClickedMovie } = useSelector((state) => state);
-
-  const posterStatus = useSelector((state) => state.clickedMovie);
+  const { clickedMovie, onSuccess, onSuccessEdit, onSuccessDelete } =
+    useSelector((state) => state);
   useEffect(() => {
     // fetch data with thunk
     dispatch(fetchData());
   }, []);
 
-  console.log(editClickedMovie);
+  const [successModal, setSuccessModal] = useState(false);
 
   return (
-    <div className={posterStatus ? "container active" : "container"}>
-      {onSuccess && alert("SUCCESS!")}
+    <div className={clickedMovie ? "container active" : "container"}>
+      <Modal modalState={onSuccess} setModalState={setSuccessModal}>
+        <NotificationModal
+          title="Congratulations!"
+          success={true}
+          info="The movie has been added to 
+        database successfully"
+        />
+      </Modal>
+      <Modal modalState={onSuccessEdit} setModalState={setSuccessModal}>
+        <NotificationModal
+          title="Congratulations!"
+          success={true}
+          info="The movie has been edited successfully"
+        />
+      </Modal>
+      <Modal modalState={onSuccessDelete} setModalState={setSuccessModal}>
+        <NotificationModal
+          title="Congratulations!"
+          success={true}
+          info="The movie has been deleted successfully"
+        />
+      </Modal>
+
       <Header />
       <Main />
       <Footer />

@@ -4,6 +4,8 @@ import {
   onSuccess,
   onError,
   resetClickedMovie,
+  onSuccessEdit,
+  onSuccessDelete,
 } from "../redux/action";
 
 export function fetchData() {
@@ -38,18 +40,6 @@ export function postMovie(obj) {
     modalOverview: overview,
   } = obj;
 
-  console.log(
-    JSON.stringify({
-      title,
-      release_date,
-      poster_path,
-      vote_average,
-      genres,
-      runtime,
-      overview,
-    })
-  );
-
   return (dispatch) => {
     return fetch("http://localhost:4000/movies", {
       headers: {
@@ -70,13 +60,13 @@ export function postMovie(obj) {
       .then((res) => {
         if (res.ok === true) {
           dispatch(onSuccess());
+          dispatch(fetchData());
         } else {
-          console.log(res);
           dispatch(onError("Something went wrong!"));
         }
       })
       .catch((err) => {
-        dispatch(onError(err));
+        console.log(err);
       });
   };
 }
@@ -99,7 +89,7 @@ export function editMovie(obj, id) {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
-        id,
+        id: id.id,
         title,
         release_date,
         poster_path,
@@ -113,7 +103,10 @@ export function editMovie(obj, id) {
         if (res.ok === true) {
           console.log("SUCCESS");
           dispatch(resetClickedMovie());
+          dispatch(onSuccessEdit(true));
+          dispatch(fetchData());
         } else {
+          console.log(res);
           console.log("FAILURE");
         }
       })
@@ -129,7 +122,8 @@ export function deleteMovie(id) {
       method: "DELETE",
     }).then((res) => {
       if (res.ok === true) {
-        console.log("SUCCESS");
+        dispatch(onSuccessDelete(true));
+        dispatch(fetchData());
       } else {
         console.log("SOMETHING WENT WRONG!");
       }
