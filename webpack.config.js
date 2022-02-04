@@ -48,7 +48,7 @@ module.exports = (env) => {
     },
     devServer: {
       port: env.port,
-      // historyApiFallback: true,
+      historyApiFallback: true,
     },
     optimization: {
       minimize: true,

@@ -9,6 +9,8 @@ import { NotificationModal, AddModal, Modal } from "..";
 // redux
 import { useDispatch } from "react-redux";
 
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 // Action creator
 import {
   clickMovie,
@@ -30,7 +32,9 @@ const MovieCard = ({
   const [editMenu, setEditMenu] = React.useState(false);
   const [editModal, setEditModal] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
-
+  const navigate = useNavigate();
+  const { pathname, search } = useLocation();
+  const param = useParams();
   const dispatch = useDispatch();
 
   const onClickEditIcon = (e) => {
@@ -53,7 +57,6 @@ const MovieCard = ({
         return null;
     }
   };
-
   return (
     <React.Fragment>
       <Modal modalState={editModal} setModalState={setEditModal}>
@@ -71,18 +74,20 @@ const MovieCard = ({
       <div
         className="moviecard"
         onClick={() => {
-          dispatch(
-            clickMovie({
-              id,
-              title,
-              poster_path,
-              genres,
-              release_date,
-              overview,
-              vote_average,
-              runtime,
-            })
-          );
+          // dispatch(
+          //   clickMovie({
+          //     id,
+          //     title,
+          //     poster_path,
+          //     genres,
+          //     release_date,
+          //     overview,
+          //     vote_average,
+          //     runtime,
+          //   })
+          // );
+
+          navigate(`/search/${title}/${id}`);
         }}
       >
         <img className="moviecard__poster" src={poster_path} alt="" />

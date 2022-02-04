@@ -6,11 +6,14 @@ import {
   resetClickedMovie,
   onSuccessEdit,
   onSuccessDelete,
+  searchMovieByName,
 } from "../redux/action";
 
 export function fetchData() {
   return (dispatch) => {
-    return fetch("http://localhost:4000/movies?&limit=6")
+    return fetch(
+      "http://localhost:4000/movies?sortBy=vote_average&sortOrder=desc&limit=6"
+    )
       .then((res) => res.json())
       .then((json) => dispatch(showMovie(json.data)))
       .catch((err) => console.log(err));
