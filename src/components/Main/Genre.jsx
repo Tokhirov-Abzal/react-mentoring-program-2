@@ -2,15 +2,38 @@ import React from "react";
 import { Sort } from "..";
 import { useSelector } from "react-redux";
 
+import { useSearchParams, NavLink, useNavigate } from "react-router-dom";
+
 import "./Genre.scss";
 
 const Genre = () => {
   const genreList = useSelector((state) => state.genreList);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { genre } = Object.fromEntries([...searchParams]);
   return (
     <div className="genre">
       <ul className="genre__list">
+        <li
+          className={!genre ? "active" : ""}
+          onClick={() => navigate("/search")}
+        >
+          All
+        </li>
         {genreList &&
-          genreList.map((genre) => <li key={genre.id}>{genre.title}</li>)}
+          genreList.map((genreItem) => (
+            <li
+              className={
+                genre === genreItem.title.toLowerCase() ? "active" : ""
+              }
+              key={genreItem.id}
+              onClick={() =>
+                navigate(`/search?genre=${genreItem.title.toLowerCase()}`)
+              }
+            >
+              {genreItem.title}
+            </li>
+          ))}
       </ul>
       <Sort />
     </div>

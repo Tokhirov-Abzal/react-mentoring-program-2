@@ -4,6 +4,8 @@ import { Header, Main, Footer, NotificationModal, Modal } from ".";
 import { resetSuccess } from "../redux/action";
 import "../style/main.scss";
 
+import { Routes, Route, Navigate } from "react-router-dom";
+
 // thunk
 import { fetchData } from "../thunk/thunk";
 
@@ -48,6 +50,7 @@ const App = () => {
 
       <Header />
       <Main />
+
       <Footer />
     </div>
   );

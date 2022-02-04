@@ -1,35 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Sort.scss";
 import { useDispatch } from "react-redux";
 import { sortBy } from "../../thunk/thunk";
+import { useSearchParams } from "react-router-dom";
 
 const Sort = () => {
-  const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParam = Object.fromEntries([...searchParams]);
+
+  const [active, setActive] = useState(null);
+  const options = [
+    { id: 1, title: "RATING", toBack: "vote_average" },
+    { id: 2, title: "GENRE", toBack: "genres" },
+    { id: 3, title: "RELEASE DATE", toBack: "release_date" },
+  ];
   return (
     <div className="sort">
       <h3>SORT BY: </h3>
       <div className="sort__options">
-        <h3
-          onClick={() =>
-            dispatch(sortBy("sortBy=release_date&sortOrder=desc&limit=6"))
-          }
-        >
-          RELEASE DATE
-        </h3>
-        <h3
-          onClick={() =>
-            dispatch(sortBy("searchBy=genres&filter=Adventure&limit=6"))
-          }
-        >
-          GENRE
-        </h3>
-        <h3
-          onClick={() =>
-            dispatch(sortBy("sortBy=vote_average&sortOrder=desc&limit=6"))
-          }
-        >
-          RATING
-        </h3>
+        {options.map((item) => (
+          <h3
+            key={item.id}
+            className={
+              searchParam.sortBy &&
+              options.find((obj) => obj.toBack === searchParam.sortBy).id ===
+                item.id
+                ? "active"
+                : ""
+            }
+            onClick={() => {
+              setSearchParams({
+                ...searchParam,
+                sortBy: item.toBack,
+              });
+
+              setActive(item.id);
+            }}
+          >
+            {item.title}
+          </h3>
+        ))}
       </div>
     </div>
   );

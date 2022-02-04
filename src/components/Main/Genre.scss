@@ -20,6 +20,10 @@
       color: $white;
       text-transform: uppercase;
       cursor: pointer;
+
+      &.active {
+        text-decoration: underline;
+      }
     }
   }
 
