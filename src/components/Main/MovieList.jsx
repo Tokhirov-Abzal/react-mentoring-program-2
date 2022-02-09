@@ -15,7 +15,12 @@ const MovieList = () => {
       <h2>movies found: {src && src.length}</h2>
 
       <div className="movielist__container">
-        {src && src.map((movie) => <MovieCard key={movie.id} {...movie} />)}
+        {src &&
+          src
+            .slice(0, 6)
+            .map((movie) => (
+              <MovieCard key={movie.id} {...movie} setSrc={setsrc} />
+            ))}
       </div>
     </div>
   );

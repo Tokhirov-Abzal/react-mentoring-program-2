@@ -28,6 +28,7 @@ const MovieCard = ({
   overview,
   vote_average,
   runtime,
+  setSrc,
 }) => {
   const [editMenu, setEditMenu] = React.useState(false);
   const [editModal, setEditModal] = React.useState(false);
@@ -60,7 +61,12 @@ const MovieCard = ({
   return (
     <React.Fragment>
       <Modal modalState={editModal} setModalState={setEditModal}>
-        <AddModal modalTitle="Edit" setModalState={setEditModal} />
+        <AddModal
+          modalTitle="Edit"
+          setModalState={setEditModal}
+          movieId={id}
+          setSrc={setSrc}
+        />
       </Modal>
       <Modal modalState={deleteModal} setModalState={setDeleteModal}>
         <NotificationModal
@@ -68,6 +74,8 @@ const MovieCard = ({
           info="Are you sure you want to delete this movie?"
           button="Delete"
           setDeleteModal={setDeleteModal}
+          movieId={id}
+          setSrc={setSrc}
         />
       </Modal>
 

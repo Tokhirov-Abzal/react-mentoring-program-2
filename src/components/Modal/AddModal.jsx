@@ -23,7 +23,7 @@ const MovieSchema = Yup.object().shape({
   modalOverview: Yup.string().required("Required"),
 });
 
-const AddModal = ({ modalTitle, setModalState }) => {
+const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
   const dispatch = useDispatch();
   const { editClickedMovie } = useSelector((state) => state);
 
@@ -47,6 +47,22 @@ const AddModal = ({ modalTitle, setModalState }) => {
         onSubmit={(data, { setSubmitting, resetForm }) => {
           if (editClickedMovie !== null) {
             dispatch(editMovie(data, editClickedMovie));
+            setSrc((prev) =>
+              prev.map((item) =>
+                item.id === movieId
+                  ? {
+                      id: item.id,
+                      title: data.modalTitle,
+                      release_date: data.modalReleaseDate,
+                      poster_path: data.modalUrl,
+                      vote_average: data.modalRating,
+                      genres: data.genre,
+                      runtime: data.modalRuntime,
+                      overview: data.modalOverview,
+                    }
+                  : item
+              )
+            );
             // dispatch(resetClickedMovie());
             resetForm();
             setModalState(false);
