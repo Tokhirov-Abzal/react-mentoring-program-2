@@ -35,9 +35,7 @@ function useFetch() {
             .split(" ")
             .join("&20")}&searchBy=title&limit=6`
         );
-      }
-
-      if (sortBy) {
+      } else if (sortBy) {
         fetchData(`?sortBy=${sortBy}&sortOrder=desc&limit=6`);
       }
     }
