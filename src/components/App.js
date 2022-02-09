@@ -16,10 +16,10 @@ const App = () => {
   const dispatch = useDispatch();
   const { clickedMovie, onSuccess, onSuccessEdit, onSuccessDelete } =
     useSelector((state) => state);
-  useEffect(() => {
-    // fetch data with thunk
-    dispatch(fetchData());
-  }, []);
+  // useEffect(() => {
+  //   // fetch data with thunk
+  //   dispatch(fetchData());
+  // }, []);
 
   const [successModal, setSuccessModal] = useState(false);
 

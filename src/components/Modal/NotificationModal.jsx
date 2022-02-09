@@ -22,6 +22,7 @@ const NotificationModal = ({
           onClick={() => {
             dispatch(deleteMovie(deleteClickedMovie));
             setDeleteModal(false);
+            dispatch(fetchData());
           }}
         >
           {button}
