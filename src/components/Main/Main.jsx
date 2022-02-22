@@ -1,8 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Genre, MovieList, Error, Search } from "../";
+import { Genre, MovieList, Error, Search, MovieCard } from "../";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import useFetch from "../../custom hook/useFetch";
 
 const Main = () => {
   const location = useLocation();
@@ -11,9 +12,12 @@ const Main = () => {
       <Genre />
       <Error>
         <Routes>
-          <Route path="/search/:movieName" element={<MovieList />} />
-          <Route path="/search/:movieName/:id" element={<MovieList />} />
-          <Route path="/search" element={<MovieList />} />
+          {/* <Route path="/search/:movieName" element={<MovieList />} />
+          <Route path="/search/:movieName/:id" element={<MovieList />} /> */}
+          <Route path="/search/*" element={<MovieList />}>
+            <Route path=":movieName" />
+            <Route path=":movieName/:id" />
+          </Route>
 
           <Route path="/" element={<Navigate to="/search" />} />
           <Route

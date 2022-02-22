@@ -4,7 +4,7 @@ import { Header, Main, Footer, NotificationModal, Modal } from ".";
 import { resetSuccess } from "../redux/action";
 import "../style/main.scss";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 
 // thunk
 import { fetchData } from "../thunk/thunk";
@@ -22,7 +22,9 @@ const App = () => {
   // }, []);
 
   const [successModal, setSuccessModal] = useState(false);
+  const params = useParams();
 
+  console.log(params);
   return (
     <div className={clickedMovie ? "container active" : "container"}>
       <Modal modalState={onSuccess} setModalState={setSuccessModal}>

@@ -6,21 +6,21 @@ import { fetchData, sortBy } from "../../thunk/thunk";
 
 import { useSelector, useDispatch } from "react-redux";
 import useFetch from "../../custom hook/useFetch";
-
+import { Outlet } from "react-router-dom";
 const MovieList = () => {
-  const [src, setsrc] = useFetch();
-
+  const [src, setSrc] = useFetch();
   return (
     <div className="movielist">
-      <h2>movies found: {src && src.length}</h2>
+      <h2>{src && src.length} movies found</h2>
 
       <div className="movielist__container">
         {src &&
           src
             .slice(0, 6)
             .map((movie) => (
-              <MovieCard key={movie.id} {...movie} setSrc={setsrc} />
+              <MovieCard key={movie.id} {...movie} setSrc={setSrc} />
             ))}
+        <Outlet />
       </div>
     </div>
   );

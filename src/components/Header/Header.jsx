@@ -8,7 +8,7 @@ import backgroundImg from "../../assets/Header.png";
 import { Navbar, Search, Modal, AddModal, ClickedPoster } from "../";
 import { Routes, useParams, Route, useLocation } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ src, setSrc }) => {
   const [modalState, setModalState] = useState(false);
   const clickedMovie = useSelector((state) => state.clickedMovie);
   const [movie, setMovie] = useState(null);
@@ -19,7 +19,7 @@ const Header = () => {
 
   useEffect(() => {
     setMovieId(
-      Number(
+      parseInt(
         location.pathname.split("/")[location.pathname.split("/").length - 1]
       )
     );
@@ -41,7 +41,18 @@ const Header = () => {
       )} */}
       <Routes>
         <Route
-          path="/search/*"
+          path="/search"
+          element={
+            <React.Fragment>
+              <img className="background-image" src={backgroundImg} alt="" />
+              <Navbar setModalState={setModalState} button={true} />
+              <Search />
+            </React.Fragment>
+          }
+        />
+
+        <Route
+          path="/search/:movieName"
           element={
             <React.Fragment>
               <img className="background-image" src={backgroundImg} alt="" />

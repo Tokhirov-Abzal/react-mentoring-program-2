@@ -16,20 +16,21 @@ function useFetch() {
   };
 
   useEffect(() => {
-    if (!search && location.pathname === "/search") {
+    if (
+      (!search && location.pathname === "/search") ||
+      location.pathname === "/search/"
+    ) {
       fetchData("?sortBy=vote_average&sortOrder=desc");
-    }
-
-    if (genre) {
-      fetchData(`?searchBy=genres&filter=${genre}`);
-    } else if (params.movieName && sortBy) {
-      fetchData(
-        `?sortBy=${sortBy}&sortOrder=desc&search=${params.movieName
-          .split(" ")
-          .join("%20")}&searchBy=title&limit=6`
-      );
     } else {
-      if (params.movieName) {
+      if (genre) {
+        fetchData(`?searchBy=genres&filter=${genre}`);
+      } else if (params.movieName && sortBy) {
+        fetchData(
+          `?sortBy=${sortBy}&sortOrder=desc&search=${params.movieName
+            .split(" ")
+            .join("%20")}&searchBy=title&limit=6`
+        );
+      } else if (params.movieName) {
         fetchData(
           `?search=${params.movieName.split(" ").join("&20")}&searchBy=title`
         );

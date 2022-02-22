@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./Search.scss";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 
 const Search = () => {
   const [searchState, setSearchState] = useState("");
   const navigate = useNavigate();
+  const { movieName } = useParams();
+  const [searchInitial, setSearchInitial] = useState("");
+  useEffect(() => {
+    setSearchInitial(movieName);
+  }, [movieName]);
 
   return (
     <Formik
       initialValues={{
-        searchInput: "",
+        searchInput: searchInitial || "",
       }}
+      enableReinitialize={true}
       onSubmit={(data, { resetForm }) => {
         navigate(`/search/${data.searchInput}`);
 

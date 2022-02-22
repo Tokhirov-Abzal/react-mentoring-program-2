@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputForm = ({ field, ...props, placeholder }) => {
+const InputForm = ({ field, placeholder, ...props }) => {
   const { title, type } = props;
 
   return (

@@ -26,7 +26,6 @@ const MovieSchema = Yup.object().shape({
 const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
   const dispatch = useDispatch();
   const { editClickedMovie } = useSelector((state) => state);
-
   return (
     <React.Fragment>
       <h2>{modalTitle}</h2>
@@ -68,7 +67,8 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
             setModalState(false);
           } else {
             dispatch(postMovie(data));
-            resetForm();
+
+            // resetForm();
           }
         }}
       >
