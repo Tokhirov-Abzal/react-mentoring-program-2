@@ -13,13 +13,19 @@ const Navbar = ({ setModalState, button, searchIcon }) => {
   const navigate = useNavigate();
   return (
     <div className="navbar">
-      <img className="navbar__logo" src={logoPng} alt="" />
+      <img
+        className="navbar__logo"
+        src={logoPng}
+        alt="logo"
+        data-testid="logo"
+      />
 
       {button && (
         <Button
           text="+ ADD"
           bgcolor="rgba(96, 96, 96, 0.6)"
           onModal={setModalState}
+          data-testid="addBtn"
         />
       )}
       {searchIcon && (
@@ -31,6 +37,7 @@ const Navbar = ({ setModalState, button, searchIcon }) => {
             dispatch(resetClickedMovie());
             navigate("/search");
           }}
+          data-testid="search-icon"
         />
       )}
     </div>

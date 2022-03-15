@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
@@ -44,41 +44,3 @@ function useFetch() {
 }
 
 export default useFetch;
-
-// useEffect(() => {
-//   if (params.movieName && sortBy) {
-//     fetch(
-//       `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&search=${params.movieName
-//         .split(" ")
-//         .join("%20")}&searchBy=title&limit=6`
-//     )
-//       .then((res) => res.json())
-//       .then((json) => setData(json.data));
-//   }
-
-//   if (genre) {
-//     fetch(
-//       `http://localhost:4000/movies?searchBy=genres&filter=${genre}&limit=6`
-//     )
-//       .then((res) => res.json())
-//       .then((json) => setData(json.data));
-//   }
-
-//   if (params.movieName) {
-//     fetch(
-//       `http://localhost:4000/movies?search=${params.movieName
-//         .split(" ")
-//         .join("&20")}&searchBy=title&limit=6`
-//     )
-//       .then((res) => res.json())
-//       .then((json) => setData(json.data));
-//   }
-
-//   if (sortBy) {
-//     fetch(
-//       `http://localhost:4000/movies`
-//     )
-//       .then((res) => res.json())
-//       .then((json) => setData(json.data));
-//   }
-// }, [params.movieName, genre, sortBy]);

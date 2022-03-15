@@ -2,7 +2,7 @@ import React from "react";
 import { Sort } from "..";
 import { useSelector } from "react-redux";
 
-import { useSearchParams, NavLink, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import "./Genre.scss";
 
@@ -27,6 +27,7 @@ const Genre = () => {
                 genre === genreItem.title.toLowerCase() ? "active" : ""
               }
               key={genreItem.id}
+              data-testid="genreName"
               onClick={() =>
                 navigate(`/search?genre=${genreItem.title.toLowerCase()}`)
               }

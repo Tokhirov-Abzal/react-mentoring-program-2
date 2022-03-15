@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Button.scss";
 
-const Button = ({ text, bgcolor, onModal }) => {
+const Button = (props) => {
+  const { text, bgcolor, onModal } = props;
   return (
     <button
       style={{ backgroundColor: bgcolor }}
       className="btn__main"
       onClick={() => onModal(true)}
+      {...props}
     >
       {text}
     </button>

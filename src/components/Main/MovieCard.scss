@@ -11,7 +11,12 @@
   &__poster {
     width: 322px;
     height: 455px;
-    background-size: cover;
+    background-color: rgb(75, 74, 74);
+    img {
+      width: 322px;
+      height: 455px;
+      background-size: cover;
+    }
   }
 
   &__info {

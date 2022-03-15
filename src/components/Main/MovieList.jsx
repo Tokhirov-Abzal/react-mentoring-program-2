@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./MovieList.scss";
 import { MovieCard } from "..";
 
-import { fetchData, sortBy } from "../../thunk/thunk";
-
-import { useSelector, useDispatch } from "react-redux";
 import useFetch from "../../custom hook/useFetch";
 import { Outlet } from "react-router-dom";
 const MovieList = () => {

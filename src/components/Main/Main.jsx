@@ -1,19 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Genre, MovieList, Error, Search, MovieCard } from "../";
+import { Genre, MovieList, Error } from "../";
 
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import useFetch from "../../custom hook/useFetch";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 const Main = () => {
-  const location = useLocation();
   return (
     <React.Fragment>
       <Genre />
       <Error>
         <Routes>
-          {/* <Route path="/search/:movieName" element={<MovieList />} />
-          <Route path="/search/:movieName/:id" element={<MovieList />} /> */}
           <Route path="/search/*" element={<MovieList />}>
             <Route path=":movieName" />
             <Route path=":movieName/:id" />

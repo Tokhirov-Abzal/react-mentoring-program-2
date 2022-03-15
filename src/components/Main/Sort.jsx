@@ -11,7 +11,6 @@ const Sort = () => {
   const [active, setActive] = useState(null);
   const options = [
     { id: 1, title: "RATING", toBack: "vote_average" },
-    // { id: 2, title: "GENRE", toBack: "genres" },
     { id: 3, title: "RELEASE DATE", toBack: "release_date" },
   ];
   return (

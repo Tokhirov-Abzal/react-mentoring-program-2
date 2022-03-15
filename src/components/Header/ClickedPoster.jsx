@@ -4,15 +4,7 @@ import "./ClickedPoster.scss";
 
 import { useParams } from "react-router-dom";
 
-const ClickedPoster = ({
-  poster_path,
-  title,
-  genres,
-  vote_average,
-  release_date,
-  runtime,
-  overview,
-}) => {
+const ClickedPoster = () => {
   const param = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -24,7 +16,6 @@ const ClickedPoster = ({
       });
   }, [param.id]);
 
-  console.log(movie);
   return (
     <div className="clickedPoster">
       <Navbar searchIcon={true} />

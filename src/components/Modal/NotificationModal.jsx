@@ -2,10 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteMovie, fetchData } from "../../thunk/thunk";
 
-import useFetch from "../../custom hook/useFetch";
-
 import successImg from "../../assets/success.svg";
-import { useNavigate } from "react-router-dom";
 const NotificationModal = ({
   title,
   info,
