@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  Component,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Header, Main, Footer, NotificationModal, Modal } from ".";
 import { resetSuccess } from "../redux/action";
@@ -24,7 +30,6 @@ const App = () => {
   const [successModal, setSuccessModal] = useState(false);
   const params = useParams();
 
-  console.log(params);
   return (
     <div className={clickedMovie ? "container active" : "container"}>
       <Modal modalState={onSuccess} setModalState={setSuccessModal}>

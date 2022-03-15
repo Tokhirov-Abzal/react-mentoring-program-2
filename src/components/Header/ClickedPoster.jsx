@@ -4,15 +4,7 @@ import "./ClickedPoster.scss";
 
 import { useParams } from "react-router-dom";
 
-const ClickedPoster = ({
-  poster_path,
-  title,
-  genres,
-  vote_average,
-  release_date,
-  runtime,
-  overview,
-}) => {
+const ClickedPoster = ({ testMovie }) => {
   const param = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -24,7 +16,47 @@ const ClickedPoster = ({
       });
   }, [param.id]);
 
-  console.log(movie);
+  if (testMovie) {
+    return (
+      <div className="clickedPoster">
+        <Navbar searchIcon={true} />
+
+        {testMovie && (
+          <div className="clickedPoster__info">
+            <div className="clickedPoster__image--container">
+              <img
+                className="clickedPoster__image"
+                src={testMovie.poster_path}
+                alt=""
+              />
+            </div>
+            <div className="clickedPoster__detail">
+              <div className="clickedPoster__title">
+                <div className="clickedPoster__name">
+                  <h2>{testMovie.title}</h2>
+                  <h4>{testMovie.genres.join("/")}</h4>
+                </div>
+                <div className="clickedPoster__rate">
+                  {testMovie.vote_average}
+                </div>
+              </div>
+              <div className="clickedPoster__timeinfo">
+                <h3>{testMovie.release_date.split("-")[0]}</h3>
+                <h3>
+                  {testMovie.runtime / 60 > 0
+                    ? `${Math.floor(testMovie.runtime / 60)}h`
+                    : "0hour"}
+                  {testMovie.runtime % 60}min
+                </h3>
+              </div>
+              <p className="clickedPoster__overview">{testMovie.overview}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="clickedPoster">
       <Navbar searchIcon={true} />

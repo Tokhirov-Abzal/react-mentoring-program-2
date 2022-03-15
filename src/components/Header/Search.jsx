@@ -21,8 +21,6 @@ const Search = () => {
       enableReinitialize={true}
       onSubmit={(data, { resetForm }) => {
         navigate(`/search/${data.searchInput}`);
-
-        resetForm();
       }}
     >
       {({ values }) => (
@@ -35,8 +33,13 @@ const Search = () => {
                 className="search__input"
                 type="text"
                 placeholder="Search movie"
+                data-testid="searchInput"
               />
-              <button type="submit" className="search__button">
+              <button
+                type="submit"
+                className="search__button"
+                data-testid="searchBtn"
+              >
                 Search
               </button>
             </div>

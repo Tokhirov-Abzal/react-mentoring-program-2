@@ -44,7 +44,12 @@ const Header = ({ src, setSrc }) => {
           path="/search"
           element={
             <React.Fragment>
-              <img className="background-image" src={backgroundImg} alt="" />
+              <img
+                className="background-image"
+                src={backgroundImg}
+                alt="bgImage"
+                data-testId="bgImage"
+              />
               <Navbar setModalState={setModalState} button={true} />
               <Search />
             </React.Fragment>

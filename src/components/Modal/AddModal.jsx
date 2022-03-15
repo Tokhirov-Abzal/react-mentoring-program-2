@@ -73,7 +73,7 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
         }}
       >
         {({ values, isSubmitting, errors, touched, resetForm }) => (
-          <Form>
+          <Form data-testId="form-test">
             <div className="input__wrapper">
               <Field
                 title="Title"
@@ -81,6 +81,7 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
                 placeholder="Title"
                 component={InputForm}
                 type="text"
+                data-testId="modal-input"
               />
               {errors.modalTitle && touched.modalTitle && (
                 <pre style={{ color: "orange" }}>{errors.modalTitle}</pre>
@@ -93,6 +94,7 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
                 type="date"
                 name="modalReleaseDate"
                 component={InputForm}
+                data-testId="modal-input2"
               />
               {errors.modalReleaseDate && touched.modalReleaseDate && (
                 <pre style={{ color: "orange" }}>{errors.modalReleaseDate}</pre>
@@ -106,6 +108,7 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
                 placeholder="https://"
                 name="modalUrl"
                 component={InputForm}
+                data-testId="modal-input3"
               />
               {errors.modalUrl && touched.modalUrl && (
                 <pre style={{ color: "orange" }}>{errors.modalUrl}</pre>
@@ -117,12 +120,13 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
                 type="number"
                 name="modalRating"
                 component={InputForm}
+                data-testId="modal-input4"
               />
               {errors.modalRating && touched.modalRating && (
                 <pre style={{ color: "orange" }}>{errors.modalRating}</pre>
               )}
             </div>
-            <div className="input__wrapper">
+            <div className="input__wrapper" data-testId="modal-input5">
               <Select title="Genre" />
               {touched.genre && values.genre.length === 0 ? (
                 <pre style={{ color: "orange" }}>
@@ -138,6 +142,7 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
                 placeholder="minutes"
                 name="modalRuntime"
                 component={InputForm}
+                data-testId="modal-input6"
               />
               {errors.modalRuntime && touched.modalRuntime && (
                 <pre style={{ color: "orange" }}>{errors.modalRuntime}</pre>
@@ -147,9 +152,9 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
               <Field
                 title="Overview"
                 placeholder="Movie description"
-                placeholder="Movie description"
                 name="modalOverview"
                 component={InputTextarea}
+                data-testId="modal-input7"
               />
               {errors.modalOverview && touched.modalOverview && (
                 <pre style={{ color: "orange" }}>{errors.modalOverview}</pre>
@@ -162,15 +167,24 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
                   resetForm();
                   dispatch(editClickedMovieById(null));
                 }}
+                data-testId="modal-resetBtn"
               >
                 Reset
               </button>
               {editClickedMovie ? (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  data-testId="editBtn-test"
+                >
                   Edit
                 </button>
               ) : (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  data-testId="submitBtn-test"
+                >
                   Submit
                 </button>
               )}

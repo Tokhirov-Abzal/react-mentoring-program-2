@@ -24,6 +24,7 @@ const Modal = ({ children, modalState, setModalState }) => {
   return (
     <div
       className={modalState ? "modal active" : "modal"}
+      data-testId="modal"
       onClick={() => {
         setModalState(false);
         dispatch(resetClickedMovie());
@@ -43,6 +44,7 @@ const Modal = ({ children, modalState, setModalState }) => {
             dispatch(onSuccessEdit(false));
             dispatch(onSuccessDelete(false));
           }}
+          data-testId="modal-cancelBtn"
         />
         {children}
       </div>

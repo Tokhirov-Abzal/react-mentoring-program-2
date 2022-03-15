@@ -27,6 +27,7 @@ const Genre = () => {
                 genre === genreItem.title.toLowerCase() ? "active" : ""
               }
               key={genreItem.id}
+              data-testid="genreName"
               onClick={() =>
                 navigate(`/search?genre=${genreItem.title.toLowerCase()}`)
               }

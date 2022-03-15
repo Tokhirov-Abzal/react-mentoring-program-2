@@ -98,11 +98,11 @@ const MovieCard = ({
           navigate(`/search/${title}/${id}`);
         }}
       >
-        <img className="moviecard__poster" src={poster_path} alt="" />
+        <img className="moviecard__poster" src={poster_path} alt="poster" />
         <div className="moviecard__info">
           <div>
             <h3>{title}</h3>
-            <h4>{genres}</h4>
+            <h4 testId="genre-movie">{genres}</h4>
           </div>
           <div className="moviecard__info--date">
             <h3>{release_date.split("-")[0]}</h3>
@@ -112,6 +112,7 @@ const MovieCard = ({
         <img
           className="edit__icon"
           src={editSvg}
+          data-testId="editIcon"
           alt="editIcon"
           onClick={(e) => onClickEditIcon(e)}
         />
@@ -124,6 +125,7 @@ const MovieCard = ({
               onClick={(e) => onClickOptions(e)}
             >
               <div
+                data-testId="edit-test"
                 onClick={() => {
                   dispatch(
                     editClickedMovieById({
@@ -142,6 +144,7 @@ const MovieCard = ({
                 Edit
               </div>
               <div
+                data-testId="delete-test"
                 onClick={() => {
                   dispatch(deleteClickedMovie(id));
                 }}
