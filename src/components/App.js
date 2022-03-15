@@ -1,8 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  Component,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Header, Main, Footer, NotificationModal, Modal } from ".";
 import { resetSuccess } from "../redux/action";
 import "../style/main.scss";
+
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 
 // thunk
 import { fetchData } from "../thunk/thunk";
@@ -14,12 +22,13 @@ const App = () => {
   const dispatch = useDispatch();
   const { clickedMovie, onSuccess, onSuccessEdit, onSuccessDelete } =
     useSelector((state) => state);
-  useEffect(() => {
-    // fetch data with thunk
-    dispatch(fetchData());
-  }, []);
+  // useEffect(() => {
+  //   // fetch data with thunk
+  //   dispatch(fetchData());
+  // }, []);
 
   const [successModal, setSuccessModal] = useState(false);
+  const params = useParams();
 
   return (
     <div className={clickedMovie ? "container active" : "container"}>
@@ -48,6 +57,7 @@ const App = () => {
 
       <Header />
       <Main />
+
       <Footer />
     </div>
   );

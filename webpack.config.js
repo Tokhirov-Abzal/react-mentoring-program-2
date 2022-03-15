@@ -19,9 +19,7 @@ module.exports = (env) => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-          },
+          loader: "babel-loader",
         },
         {
           test: /\.(css|scss)$/,
@@ -48,7 +46,7 @@ module.exports = (env) => {
     },
     devServer: {
       port: env.port,
-      // historyApiFallback: true,
+      historyApiFallback: true,
     },
     optimization: {
       minimize: true,
