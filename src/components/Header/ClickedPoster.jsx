@@ -26,7 +26,7 @@ const ClickedPoster = () => {
             <img
               className="clickedPoster__image"
               src={movie.poster_path}
-              alt=""
+              alt="clickedPoster"
             />
           </div>
           <div className="clickedPoster__detail">
@@ -41,8 +41,8 @@ const ClickedPoster = () => {
               <h3>{movie.release_date.split("-")[0]}</h3>
               <h3>
                 {movie.runtime / 60 > 0
-                  ? `${Math.floor(movie.runtime / 60)}h`
-                  : "0hour"}
+                  ? `${Math.floor(movie.runtime / 60)}h `
+                  : "0 hour"}
                 {movie.runtime % 60}min
               </h3>
             </div>

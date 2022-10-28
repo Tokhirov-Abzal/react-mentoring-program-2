@@ -4,7 +4,6 @@ import { Header, Main, Footer, NotificationModal, Modal } from ".";
 import "../style/main.scss";
 
 const App = () => {
-  // redux
   const { clickedMovie, onSuccess, onSuccessEdit, onSuccessDelete } =
     useSelector((state) => state);
 

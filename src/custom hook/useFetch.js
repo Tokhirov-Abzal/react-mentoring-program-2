@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { DICTIONARY } from "../dictionary";
 
 function useFetch() {
   const [data, setData] = useState();
@@ -17,8 +18,8 @@ function useFetch() {
 
   useEffect(() => {
     if (
-      (!search && location.pathname === "/search") ||
-      location.pathname === "/search/"
+      (!search && location.pathname === DICTIONARY.search.baseSearchUrl) ||
+      location.pathname === `${DICTIONARY.search.baseSearchUrl}/`
     ) {
       fetchData("?sortBy=vote_average&sortOrder=desc");
     } else {

@@ -5,12 +5,15 @@ import "./Navbar.scss";
 import searchBtn from "../../assets/search-btn.svg";
 
 import { useDispatch } from "react-redux";
-// action creator for reset header poster
 import { resetClickedMovie } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
+import { formSearchUrl } from "../../helpers";
+
 const Navbar = ({ setModalState, button, searchIcon }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toSearchUrl = formSearchUrl();
+
   return (
     <div className="navbar">
       <img
@@ -35,7 +38,7 @@ const Navbar = ({ setModalState, button, searchIcon }) => {
           alt="search icon"
           onClick={() => {
             dispatch(resetClickedMovie());
-            navigate("/search");
+            navigate(toSearchUrl);
           }}
           data-testid="search-icon"
         />

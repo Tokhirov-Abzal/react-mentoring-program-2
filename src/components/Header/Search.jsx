@@ -3,14 +3,29 @@ import "./Search.scss";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
+import { formSearchUrl } from "../../helpers";
 
 const Search = () => {
   const navigate = useNavigate();
   const { movieName } = useParams();
   const [searchInitial, setSearchInitial] = useState("");
+
   useEffect(() => {
     setSearchInitial(movieName);
   }, [movieName]);
+
+  const submitHandler = (data) => {
+    const inputUrlData = data.searchInput;
+
+    if (inputUrlData) {
+      const toSearchUrl = formSearchUrl({ inputUrlData });
+      navigate(toSearchUrl);
+
+      return;
+    }
+
+    navigate(formSearchUrl());
+  };
 
   return (
     <Formik
@@ -18,9 +33,7 @@ const Search = () => {
         searchInput: searchInitial || "",
       }}
       enableReinitialize={true}
-      onSubmit={(data) => {
-        navigate(`/search/${data.searchInput}`);
-      }}
+      onSubmit={submitHandler}
     >
       {() => (
         <Form>

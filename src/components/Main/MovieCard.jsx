@@ -5,14 +5,12 @@ import editSvg from "../../assets/edit.svg";
 import closePng from "../../assets/x.png";
 
 import { NotificationModal, AddModal, Modal } from "..";
-
-// redux
 import { useDispatch } from "react-redux";
 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
-// Action creator
+import { useNavigate } from "react-router-dom";
 import { editClickedMovieById, deleteClickedMovie } from "../../redux/action";
+
+import { formSearchUrl } from "../../helpers";
 
 const MovieCard = (props) => {
   const {
@@ -31,8 +29,6 @@ const MovieCard = (props) => {
   const [editModal, setEditModal] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
   const navigate = useNavigate();
-  const { pathname, search } = useLocation();
-  const param = useParams();
   const dispatch = useDispatch();
   const onClickEditIcon = (e) => {
     setEditMenu((prev) => !prev);
@@ -53,6 +49,11 @@ const MovieCard = (props) => {
       default:
         return null;
     }
+  };
+
+  const onClickMovieCard = () => {
+    const navigateToUrl = formSearchUrl({ title, id });
+    navigate(navigateToUrl);
   };
   return (
     <React.Fragment>
@@ -75,12 +76,7 @@ const MovieCard = (props) => {
         />
       </Modal>
 
-      <div
-        className="moviecard"
-        onClick={() => {
-          navigate(`/search/${title}/${id}`);
-        }}
-      >
+      <div className="moviecard" onClick={onClickMovieCard}>
         <div className="moviecard__poster">
           <img className="moviecard__poster" src={poster_path} alt="poster" />
         </div>

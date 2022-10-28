@@ -13,7 +13,7 @@ import { useLayoutEffect } from "react";
 
 const Modal = ({ children, modalState, setModalState }) => {
   const dispatch = useDispatch();
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (modalState) {
       document.body.style.overflow = "hidden";
     } else {

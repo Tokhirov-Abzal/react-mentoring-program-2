@@ -30,12 +30,11 @@ describe("AddModal test", () => {
     expect(screen.getByText("For test")).toBeInTheDocument();
     expect(screen.getByTestId("form-test")).toBeInTheDocument();
     expect(screen.getByTestId("modal-input")).toBeInTheDocument();
-    expect(screen.getByTestId("modal-input2")).toBeInTheDocument();
-    expect(screen.getByTestId("modal-input3")).toBeInTheDocument();
-    expect(screen.getByTestId("modal-input4")).toBeInTheDocument();
-    expect(screen.getByTestId("modal-input5")).toBeInTheDocument();
-    expect(screen.getByTestId("modal-input6")).toBeInTheDocument();
-    expect(screen.getByTestId("modal-input7")).toBeInTheDocument();
+
+    for (let i = 2; i < 8; i++) {
+      expect(screen.getByTestId(`modal-input${i}`)).toBeInTheDocument();
+    }
+
     expect(screen.queryByTestId("submitBtn-test")).toBeInTheDocument();
     expect(screen.queryByTestId("editBtn-test")).toBeNull();
 

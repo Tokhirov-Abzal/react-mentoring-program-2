@@ -2,6 +2,7 @@ import React from "react";
 import { Genre, MovieList, Error } from "../";
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import { DICTIONARY } from "../../dictionary";
 
 const Main = () => {
   return (
@@ -9,12 +10,18 @@ const Main = () => {
       <Genre />
       <Error>
         <Routes>
-          <Route path="/search/*" element={<MovieList />}>
+          <Route
+            path={`${DICTIONARY.search.baseSearchUrl}/*`}
+            element={<MovieList />}
+          >
             <Route path=":movieName" />
             <Route path=":movieName/:id" />
           </Route>
 
-          <Route path="/" element={<Navigate to="/search" />} />
+          <Route
+            path="/"
+            element={<Navigate to={DICTIONARY.search.baseSearchUrl} />}
+          />
           <Route
             path="/*"
             element={

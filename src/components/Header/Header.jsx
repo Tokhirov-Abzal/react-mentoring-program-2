@@ -5,23 +5,21 @@ import "./Header.scss";
 import backgroundImg from "../../assets/Header.png";
 
 import { Navbar, Search, Modal, AddModal, ClickedPoster } from "../";
-import { Routes, useParams, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useMemo } from "react";
+import { DICTIONARY } from "../../dictionary";
 
 const Header = () => {
   const [modalState, setModalState] = useState(false);
   const [movie, setMovie] = useState(null);
-  const { id } = useParams();
-  useEffect(() => {}, [id]);
   const location = useLocation();
   const [movieId, setMovieId] = useState(null);
+  const pathName = useMemo(() => location.pathname, [location]);
 
   useEffect(() => {
-    setMovieId(
-      parseInt(
-        location.pathname.split("/")[location.pathname.split("/").length - 1]
-      )
-    );
-  }, [location.pathname]);
+    setMovieId(parseInt(pathName.split("/").pop()));
+  }, [pathName]);
+
   return (
     <div className={!isNaN(movieId) ? "header withPoster" : "header"}>
       <Modal modalState={modalState} setModalState={setModalState}>
@@ -29,7 +27,7 @@ const Header = () => {
       </Modal>
       <Routes>
         <Route
-          path="/search"
+          path={DICTIONARY.search.baseSearchUrl}
           element={
             <React.Fragment>
               <img
@@ -45,10 +43,14 @@ const Header = () => {
         />
 
         <Route
-          path="/search/:movieName"
+          path={`${DICTIONARY.search.baseSearchUrl}/:movieName`}
           element={
             <React.Fragment>
-              <img className="background-image" src={backgroundImg} alt="" />
+              <img
+                className="background-image"
+                src={backgroundImg}
+                alt="background-image"
+              />
               <Navbar setModalState={setModalState} button={true} />
               <Search />
             </React.Fragment>
@@ -56,14 +58,18 @@ const Header = () => {
         />
 
         <Route
-          path="/search/:movieName/:id"
+          path={`${DICTIONARY.search.baseSearchUrl}/:movieName/:id`}
           element={<ClickedPoster {...movie} />}
         />
         <Route
           path="/*"
           element={
             <React.Fragment>
-              <img className="background-image" src={backgroundImg} alt="" />
+              <img
+                className="background-image"
+                src={backgroundImg}
+                alt="background-image"
+              />
               <Navbar setModalState={setModalState} button={true} />
               <Search />
             </React.Fragment>

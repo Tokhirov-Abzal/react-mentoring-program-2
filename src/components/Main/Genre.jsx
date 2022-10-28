@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
 import "./Genre.scss";
+import { formSearchUrl } from "../../helpers";
+import { DICTIONARY } from "../../dictionary";
 
 const Genre = () => {
   const genreList = useSelector((state) => state.genreList);
@@ -16,7 +18,7 @@ const Genre = () => {
       <ul className="genre__list">
         <li
           className={!genre ? "active" : ""}
-          onClick={() => navigate("/search")}
+          onClick={() => navigate(formSearchUrl())}
         >
           All
         </li>
@@ -29,7 +31,11 @@ const Genre = () => {
               key={genreItem.id}
               data-testid="genreName"
               onClick={() =>
-                navigate(`/search?genre=${genreItem.title.toLowerCase()}`)
+                navigate(
+                  `${
+                    DICTIONARY.search.baseSearchUrl
+                  }?genre=${genreItem.title.toLowerCase()}`
+                )
               }
             >
               {genreItem.title}
