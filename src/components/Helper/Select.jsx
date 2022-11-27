@@ -16,10 +16,11 @@ const Select = ({ title, field, ...props }) => {
       <div className="options">
         <div
           className="options__title"
+          data-testid="selectBtn"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           Select Genre
-          <img src={arrow} className={!isOpen ? "arrow-up" : ""} alt="" />
+          <img src={arrow} className={!isOpen ? "arrow-up" : ""} alt="arrow" />
         </div>
         {isOpen && (
           <div className="options__container">

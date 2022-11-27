@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
-  onSuccess,
   resetClickedMovie,
   resetSuccess,
   onSuccessEdit,
@@ -10,6 +9,7 @@ import {
 
 import "./Modal.scss";
 import cancelPng from "../../assets/x.png";
+import { useLayoutEffect } from "react";
 
 const Modal = ({ children, modalState, setModalState }) => {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const Modal = ({ children, modalState, setModalState }) => {
   return (
     <div
       className={modalState ? "modal active" : "modal"}
+      data-testid="modal"
       onClick={() => {
         setModalState(false);
         dispatch(resetClickedMovie());
@@ -43,6 +44,7 @@ const Modal = ({ children, modalState, setModalState }) => {
             dispatch(onSuccessEdit(false));
             dispatch(onSuccessDelete(false));
           }}
+          data-testid="modal-cancelBtn"
         />
         {children}
       </div>

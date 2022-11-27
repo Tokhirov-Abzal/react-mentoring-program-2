@@ -9,9 +9,12 @@ const NotificationModal = ({
   button,
   setDeleteModal,
   success,
+  setSrc,
+  movieId,
 }) => {
   const dispatch = useDispatch();
   const { deleteClickedMovie } = useSelector((state) => state);
+
   return (
     <React.Fragment>
       {success && <img className="notification__icon" src={successImg} />}
@@ -22,6 +25,7 @@ const NotificationModal = ({
           onClick={() => {
             dispatch(deleteMovie(deleteClickedMovie));
             setDeleteModal(false);
+            setSrc((prev) => prev.filter((item) => item.id !== movieId));
           }}
         >
           {button}

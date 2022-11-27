@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import {
   showMovie,
   onSuccess,
@@ -10,7 +9,9 @@ import {
 
 export function fetchData() {
   return (dispatch) => {
-    return fetch("http://localhost:4000/movies?&limit=6")
+    return fetch(
+      "http://localhost:4000/movies?sortBy=vote_average&sortOrder=desc&limit=6"
+    )
       .then((res) => res.json())
       .then((json) => dispatch(showMovie(json.data)))
       .catch((err) => console.log(err));

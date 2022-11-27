@@ -5,11 +5,7 @@ import { Formik, Form, Field } from "formik";
 import { postMovie, editMovie } from "../../thunk/thunk";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editClickedMovieById,
-  onSuccessEdit,
-  resetClickedMovie,
-} from "../../redux/action";
+import { editClickedMovieById } from "../../redux/action";
 
 const MovieSchema = Yup.object().shape({
   modalTitle: Yup.string().required("Required"),
@@ -23,10 +19,9 @@ const MovieSchema = Yup.object().shape({
   modalOverview: Yup.string().required("Required"),
 });
 
-const AddModal = ({ modalTitle, setModalState }) => {
+const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
   const dispatch = useDispatch();
   const { editClickedMovie } = useSelector((state) => state);
-
   return (
     <React.Fragment>
       <h2>{modalTitle}</h2>
@@ -47,17 +42,32 @@ const AddModal = ({ modalTitle, setModalState }) => {
         onSubmit={(data, { setSubmitting, resetForm }) => {
           if (editClickedMovie !== null) {
             dispatch(editMovie(data, editClickedMovie));
-            // dispatch(resetClickedMovie());
+            setSrc((prev) =>
+              prev.map((item) =>
+                item.id === movieId
+                  ? {
+                      id: item.id,
+                      title: data.modalTitle,
+                      release_date: data.modalReleaseDate,
+                      poster_path: data.modalUrl,
+                      vote_average: data.modalRating,
+                      genres: data.genre,
+                      runtime: data.modalRuntime,
+                      overview: data.modalOverview,
+                    }
+                  : item
+              )
+            );
+
             resetForm();
             setModalState(false);
           } else {
             dispatch(postMovie(data));
-            resetForm();
           }
         }}
       >
         {({ values, isSubmitting, errors, touched, resetForm }) => (
-          <Form>
+          <Form data-testid="form-test">
             <div className="input__wrapper">
               <Field
                 title="Title"
@@ -65,6 +75,7 @@ const AddModal = ({ modalTitle, setModalState }) => {
                 placeholder="Title"
                 component={InputForm}
                 type="text"
+                data-testid="modal-input"
               />
               {errors.modalTitle && touched.modalTitle && (
                 <pre style={{ color: "orange" }}>{errors.modalTitle}</pre>
@@ -77,6 +88,7 @@ const AddModal = ({ modalTitle, setModalState }) => {
                 type="date"
                 name="modalReleaseDate"
                 component={InputForm}
+                data-testid="modal-input2"
               />
               {errors.modalReleaseDate && touched.modalReleaseDate && (
                 <pre style={{ color: "orange" }}>{errors.modalReleaseDate}</pre>
@@ -90,6 +102,7 @@ const AddModal = ({ modalTitle, setModalState }) => {
                 placeholder="https://"
                 name="modalUrl"
                 component={InputForm}
+                data-testid="modal-input3"
               />
               {errors.modalUrl && touched.modalUrl && (
                 <pre style={{ color: "orange" }}>{errors.modalUrl}</pre>
@@ -101,12 +114,13 @@ const AddModal = ({ modalTitle, setModalState }) => {
                 type="number"
                 name="modalRating"
                 component={InputForm}
+                data-testid="modal-input4"
               />
               {errors.modalRating && touched.modalRating && (
                 <pre style={{ color: "orange" }}>{errors.modalRating}</pre>
               )}
             </div>
-            <div className="input__wrapper">
+            <div className="input__wrapper" data-testid="modal-input5">
               <Select title="Genre" />
               {touched.genre && values.genre.length === 0 ? (
                 <pre style={{ color: "orange" }}>
@@ -122,6 +136,7 @@ const AddModal = ({ modalTitle, setModalState }) => {
                 placeholder="minutes"
                 name="modalRuntime"
                 component={InputForm}
+                data-testid="modal-input6"
               />
               {errors.modalRuntime && touched.modalRuntime && (
                 <pre style={{ color: "orange" }}>{errors.modalRuntime}</pre>
@@ -131,9 +146,9 @@ const AddModal = ({ modalTitle, setModalState }) => {
               <Field
                 title="Overview"
                 placeholder="Movie description"
-                placeholder="Movie description"
                 name="modalOverview"
                 component={InputTextarea}
+                data-testid="modal-input7"
               />
               {errors.modalOverview && touched.modalOverview && (
                 <pre style={{ color: "orange" }}>{errors.modalOverview}</pre>
@@ -146,22 +161,28 @@ const AddModal = ({ modalTitle, setModalState }) => {
                   resetForm();
                   dispatch(editClickedMovieById(null));
                 }}
+                data-testid="modal-resetBtn"
               >
                 Reset
               </button>
               {editClickedMovie ? (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  data-testid="editBtn-test"
+                >
                   Edit
                 </button>
               ) : (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  data-testid="submitBtn-test"
+                >
                   Submit
                 </button>
               )}
             </div>
-            {/* <pre style={{ color: "white" }}>
-              {JSON.stringify(values, null, 2)}
-            </pre> */}
           </Form>
         )}
       </Formik>

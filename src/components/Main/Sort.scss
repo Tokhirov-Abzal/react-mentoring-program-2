@@ -9,9 +9,14 @@
     margin-left: 30px;
     font-weight: 400;
     cursor: pointer;
+
+    &.active {
+      color: $red;
+    }
   }
 
   &__options {
     color: $white;
+    display: flex;
   }
 }
