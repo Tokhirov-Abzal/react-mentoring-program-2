@@ -1,0 +1,29 @@
+@import "colors";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: $gray;
+  transition: opacity 0.2s linear;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  background-color: $black;
+  height: 1920px;
+
+  &_active {
+    height: 1920px;
+  }
+}

@@ -1,12 +1,10 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
-import "./Sort.scss";
-import { useDispatch } from "react-redux";
-import { sortBy } from "../../thunk/thunk";
-import { useSearchParams } from "react-router-dom";
+import styles from "./Sort.module.scss";
 
 const Sort = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchParam = Object.fromEntries([...searchParams]);
+  const { query, push } = useRouter();
+  const searchParam = Object.fromEntries([]);
 
   const [active, setActive] = useState(null);
   const options = [
@@ -14,24 +12,22 @@ const Sort = () => {
     { id: 3, title: "RELEASE DATE", toBack: "release_date" },
   ];
   return (
-    <div className="sort">
+    <div className={styles.sort}>
       <h3>SORT BY: </h3>
-      <div className="sort__options">
+      <div className={styles.sort__options}>
         {options.map((item) => (
           <h3
             key={item.id}
             className={
-              searchParam.sortBy &&
-              options.find((obj) => obj.toBack === searchParam.sortBy).id ===
-                item.id
-                ? "active"
-                : ""
+              query.sortBy &&
+              options.find((obj) => obj.toBack === query.sortBy).id === item.id
+                ? styles.active
+                : null
             }
             onClick={() => {
-              setSearchParams({
-                ...searchParam,
-                sortBy: item.toBack,
-              });
+              push(
+                `/search?sortBy=${item.toBack}&sortOrder=desc&searchBy=title&limit=6`
+              );
 
               setActive(item.id);
             }}

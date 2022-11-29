@@ -6,10 +6,8 @@ import {
   onSuccessEdit,
   onSuccessDelete,
 } from "../../redux/action";
-
-import "./Modal.scss";
-import cancelPng from "../../assets/x.png";
-import { useLayoutEffect } from "react";
+import Image from "next/image";
+import cancelPng from "../../../public/x.png";
 
 const Modal = ({ children, modalState, setModalState }) => {
   const dispatch = useDispatch();
@@ -22,33 +20,35 @@ const Modal = ({ children, modalState, setModalState }) => {
   }, [modalState]);
 
   return (
-    <div
-      className={modalState ? "modal active" : "modal"}
-      data-testid="modal"
-      onClick={() => {
-        setModalState(false);
-        dispatch(resetClickedMovie());
-        dispatch(resetSuccess());
-        dispatch(onSuccessEdit(false));
-        dispatch(onSuccessDelete(false));
-      }}
-    >
-      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        <img
-          src={cancelPng}
-          alt="x"
-          onClick={() => {
-            setModalState(false);
-            dispatch(resetClickedMovie());
-            dispatch(resetSuccess());
-            dispatch(onSuccessEdit(false));
-            dispatch(onSuccessDelete(false));
-          }}
-          data-testid="modal-cancelBtn"
-        />
-        {children}
+    <>
+      <div
+        className={modalState ? "modal active" : "modal"}
+        data-testid="modal"
+        onClick={() => {
+          setModalState(false);
+          dispatch(resetClickedMovie());
+          dispatch(resetSuccess());
+          dispatch(onSuccessEdit(false));
+          dispatch(onSuccessDelete(false));
+        }}
+      >
+        <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+          <Image
+            src={cancelPng}
+            alt="x"
+            onClick={() => {
+              setModalState(false);
+              dispatch(resetClickedMovie());
+              dispatch(resetSuccess());
+              dispatch(onSuccessEdit(false));
+              dispatch(onSuccessDelete(false));
+            }}
+            data-testid="modal-cancelBtn"
+          />
+          {children}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

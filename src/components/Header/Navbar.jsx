@@ -1,23 +1,19 @@
 import React from "react";
-import logoPng from "../../assets/logo.png";
+import Link from "next/link";
+import Image from "next/image";
+import logoPng from "../../../public/logo.png";
 import { Button } from "..";
-import "./Navbar.scss";
-import searchBtn from "../../assets/search-btn.svg";
-
-import { useDispatch } from "react-redux";
-import { resetClickedMovie } from "../../redux/action";
-import { useNavigate } from "react-router-dom";
+import searchBtn from "../../../public/search-btn.svg";
+import styles from "./Navbar.module.scss";
 import { formSearchUrl } from "../../helpers";
 
 const Navbar = ({ setModalState, button, searchIcon }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const toSearchUrl = formSearchUrl();
 
   return (
-    <div className="navbar">
-      <img
-        className="navbar__logo"
+    <div className={styles.navbar}>
+      <Image
+        className={styles.navbar__logo}
         src={logoPng}
         alt="logo"
         data-testid="logo"
@@ -32,16 +28,14 @@ const Navbar = ({ setModalState, button, searchIcon }) => {
         />
       )}
       {searchIcon && (
-        <img
-          className="search__icon"
-          src={searchBtn}
-          alt="search icon"
-          onClick={() => {
-            dispatch(resetClickedMovie());
-            navigate(toSearchUrl);
-          }}
-          data-testid="search-icon"
-        />
+        <Link href={toSearchUrl}>
+          <Image
+            className={styles.search__icon}
+            src={searchBtn}
+            alt="search icon"
+            data-testid="search-icon"
+          />
+        </Link>
       )}
     </div>
   );

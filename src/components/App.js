@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Header, Main, Footer, NotificationModal, Modal } from ".";
-import "../style/main.scss";
+import { NotificationModal, Modal } from ".";
 
-const App = () => {
+const App = ({ children }) => {
   const { clickedMovie, onSuccess, onSuccessEdit, onSuccessDelete } =
     useSelector((state) => state);
 
   const [successModal, setSuccessModal] = useState(false);
 
+  const [clickedMovieState, setClickedMoviestate] = useState(null);
+
+  useEffect(() => {
+    setClickedMoviestate("container");
+
+    if (clickedMovie) {
+      setClickedMoviestate("container_active");
+    }
+  }, [clickedMovie]);
+
   return (
-    <div className={clickedMovie ? "container active" : "container"}>
+    <div className={clickedMovieState}>
       <Modal modalState={onSuccess} setModalState={setSuccessModal}>
         <NotificationModal
           title="Congratulations!"
@@ -34,10 +43,7 @@ const App = () => {
         />
       </Modal>
 
-      <Header />
-      <Main />
-
-      <Footer />
+      {children}
     </div>
   );
 };

@@ -63,6 +63,7 @@ const AddModal = ({ modalTitle, setModalState, movieId, setSrc }) => {
             setModalState(false);
           } else {
             dispatch(postMovie(data));
+            setModalState(false);
           }
         }}
       >

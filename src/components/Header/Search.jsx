@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./Search.scss";
-
-import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import { formSearchUrl } from "../../helpers";
+import { useRouter } from "next/router";
+import styles from "./Search.module.scss";
 
 const Search = () => {
-  const navigate = useNavigate();
-  const { movieName } = useParams();
+  const { query, push } = useRouter();
+  const movieName = query.movieName;
   const [searchInitial, setSearchInitial] = useState("");
 
   useEffect(() => {
@@ -19,12 +18,12 @@ const Search = () => {
 
     if (inputUrlData) {
       const toSearchUrl = formSearchUrl({ inputUrlData });
-      navigate(toSearchUrl);
+      push(toSearchUrl);
 
       return;
     }
 
-    navigate(formSearchUrl());
+    push(formSearchUrl());
   };
 
   return (
@@ -37,19 +36,19 @@ const Search = () => {
     >
       {() => (
         <Form>
-          <div className="search">
+          <div className={styles.search}>
             <h2>Find your movie</h2>
-            <div className="search__container">
+            <div className={styles.search__container}>
               <Field
                 name="searchInput"
-                className="search__input"
+                className={styles.search__input}
                 type="text"
                 placeholder="Search movie"
                 data-testid="searchInput"
               />
               <button
                 type="submit"
-                className="search__button"
+                className={styles.search__button}
                 data-testid="searchBtn"
               >
                 Search

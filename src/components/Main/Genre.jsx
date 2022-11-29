@@ -2,23 +2,21 @@ import React from "react";
 import { Sort } from "..";
 import { useSelector } from "react-redux";
 
-import { useSearchParams, useNavigate } from "react-router-dom";
-
-import "./Genre.scss";
 import { formSearchUrl } from "../../helpers";
 import { DICTIONARY } from "../../dictionary";
+import { useRouter } from "next/router";
+import styles from "./Genre.module.scss";
 
 const Genre = () => {
   const genreList = useSelector((state) => state.genreList);
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const { genre } = Object.fromEntries([...searchParams]);
+  const { query, push } = useRouter();
+
   return (
-    <div className="genre">
-      <ul className="genre__list">
+    <div className={styles.genre}>
+      <ul className={styles.genre__list}>
         <li
-          className={!genre ? "active" : ""}
-          onClick={() => navigate(formSearchUrl())}
+          className={!query.genre ? styles.active : null}
+          onClick={() => push(formSearchUrl())}
         >
           All
         </li>
@@ -26,12 +24,14 @@ const Genre = () => {
           genreList.map((genreItem) => (
             <li
               className={
-                genre === genreItem.title.toLowerCase() ? "active" : ""
+                query?.genre === genreItem.title.toLowerCase()
+                  ? styles.active
+                  : null
               }
               key={genreItem.id}
               data-testid="genreName"
               onClick={() =>
-                navigate(
+                push(
                   `${
                     DICTIONARY.search.baseSearchUrl
                   }?genre=${genreItem.title.toLowerCase()}`
