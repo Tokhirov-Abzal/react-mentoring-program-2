@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMovie, fetchData } from "../../thunk/thunk";
-
-import successImg from "../../assets/success.svg";
+import { deleteMovie } from "../../thunk/thunk";
+import Image from "next/image";
+import successImg from "../../../public/success.svg";
 const NotificationModal = ({
   title,
   info,
@@ -17,7 +17,13 @@ const NotificationModal = ({
 
   return (
     <React.Fragment>
-      {success && <img className="notification__icon" src={successImg} />}
+      {success && (
+        <Image
+          className="notification__icon"
+          src={successImg}
+          alt="notification modal"
+        />
+      )}
       <h2 className="notification__title">{title}</h2>
       <h3>{info}</h3>
       {button && (

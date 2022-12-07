@@ -1,26 +1,27 @@
-import React from "react";
-import "./MovieList.scss";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { MovieCard } from "..";
+import styles from "./MovieList.module.scss";
 
-import useFetch from "../../custom hook/useFetch";
-import { Outlet } from "react-router-dom";
-const MovieList = () => {
-  const [src, setSrc] = useFetch();
+const MovieList = ({ movieList }) => {
+  const [src, setSrc] = useState(movieList);
+
   return (
-    <div className="movielist">
-      <h2>{src && src.length} movies found</h2>
+    <div className={styles.movielist}>
+      <h2>{src.length || 0} movies found</h2>
 
-      <div className="movielist__container">
-        {src &&
-          src
-            .slice(0, 6)
-            .map((movie) => (
-              <MovieCard key={movie.id} {...movie} setSrc={setSrc} />
-            ))}
-        <Outlet />
+      <div className={styles.movielist__container}>
+        {movieList &&
+          movieList.map((movie) => (
+            <MovieCard key={movie.id} {...movie} src={src} setSrc={setSrc} />
+          ))}
       </div>
     </div>
   );
+};
+
+MovieList.defaultProps = {
+  movieList: [],
 };
 
 export default MovieList;

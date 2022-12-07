@@ -2,7 +2,6 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { AddModal } from "../components";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 
@@ -21,9 +20,7 @@ describe("AddModal test", () => {
   test("AddModal Content", () => {
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <AddModal modalTitle="For test" />
-        </BrowserRouter>
+        <AddModal modalTitle="For test" />
       </Provider>
     );
 
@@ -46,9 +43,7 @@ describe("AddModal test", () => {
     store.dispatch({ type: "EDIT_CLICKED_MOVIE", payload: mockData });
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <AddModal modalTitle="For test" />
-        </BrowserRouter>
+        <AddModal modalTitle="For test" />
       </Provider>
     );
 

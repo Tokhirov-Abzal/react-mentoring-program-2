@@ -4,7 +4,6 @@ import { render } from "@testing-library/react";
 import { ClickedPoster } from "../components";
 import store from "../redux/store";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 
 const movie = {
   id: 337167,
@@ -37,9 +36,7 @@ describe("Clicked poster component", () => {
   test("Render component", () => {
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <ClickedPoster />
-        </BrowserRouter>
+        <ClickedPoster movie={...movie} />
       </Provider>
     );
   });

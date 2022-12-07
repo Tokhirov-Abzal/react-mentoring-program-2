@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Button.scss";
+import styles from "./Button.module.scss";
 
 const Button = (props) => {
   const { text, bgcolor, onModal } = props;
   return (
     <button
       style={{ backgroundColor: bgcolor }}
-      className="btn__main"
+      className={styles.btn__main}
       onClick={() => onModal(true)}
       {...props}
     >
